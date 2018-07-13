@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number[]}
+   */
+  const twoSum = (nums, target) => {
+    const len = nums.length;
+    if (len <= 2) return [0, 1]; // 就俩还看不出来？
+    // 如果是偶数，查一下有没有2个一半
+    const half = target / 2;
+    if (target % 2 === 0) {
+      const halfArr = nums.filter(n => n === half);
+      const len = halfArr.length;
+      if (len > 1) {
+        const result = [];
+        for (let i in nums) {
+          if (nums[i] === half) {
+            result.push(+i);
+            if (result.length > 1) return result;
+          }
+        }
+      }
+    }
+    // 既然没有一样的，那就是一个小于一半，一个大于一半，先把arr分两半
+    const lowArr = nums.filter(n => n < half);
+    const highArr = nums.filter(n => n > half);
+    const need = [];
+    lowArr.forEach((n) => need.push(target - n));
+    for (let n of highArr) {
+      if (need.indexOf(n) >= 0) {
+        return [nums.indexOf(target - n), nums.indexOf(n)];
+      }
+    }
+  };
+</script>
+</body>
+</html>
