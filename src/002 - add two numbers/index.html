@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   */
+  function ListNode(val) {
+    this.val = val;
+    this.next = null;
+  }
+
+  /**
+   * @param {ListNode} l1
+   * @param {ListNode} l2
+   * @param {Number} carry
+   * @return {ListNode}
+   */
+  const addTwoNumbers = (l1, l2, carry = 0) => { // 递归搞定
+    if (!l1 && !l2 && !carry) return null;
+    const sum = +(l1 && l1.val) + +(l2 && l2.val) + carry;
+    const node = new ListNode(sum % 10);
+    node.next = addTwoNumbers(l1 && l1.next, l2 && l2.next, parseInt(sum / 10, 10));
+    return node;
+  };
+</script>
+</body>
+</html>
