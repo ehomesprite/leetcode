@@ -6,15 +6,23 @@
 </head>
 <body>
 <script>
-  class StrRecord {
-
-  }
   /**
    * @param {string} s
    * @return {number}
    */
   const lengthOfLongestSubstring = (s) => {
-
+    let maxLen = 0;
+    let arr = [];
+    for(let key of s) {
+      const index = arr.indexOf(key);
+      if (index >= 0) {
+        arr = arr.slice(index + 1);
+      }
+      arr.push(key);
+      const len = arr.length;
+      maxLen = Math.max(maxLen, len);
+    }
+    return maxLen;
   };
 </script>
 </body>
