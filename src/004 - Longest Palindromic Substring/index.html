@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const getMaxSubstr = ({ start, end, data }) => {
+    while (start >= 0 && end < data.str.length) {
+      if (data.str.charAt(start) === data.str.charAt(end)) {
+        const len = end - start;
+        if (len > data.maxLen) {
+          data.maxLen = len;
+          data.maxSubstr = data.str.slice(start, end + 1);
+        }
+      } else {
+        return;
+      }
+      start--;
+      end++;
+    }
+  };
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  const longestPalindrome = (s) => {
+    if (!s) return '';
+    const data = {
+      str: s,
+      maxLen: 0,
+      maxSubstr: s.charAt(0),
+    };
+    if (data.str.length <= 1) {
+      return data.maxSubstr;
+    }
+    for (let i = 0; i < s.length - Math.ceil((data.maxLen) / 2); i++) {
+      getMaxSubstr({
+        start: i,
+        end: i + 1,
+        data,
+      });
+      getMaxSubstr({
+        start: i - 1,
+        end: i + 1,
+        data,
+      });
+    }
+    return data.maxSubstr;
+  };
+</script>
+</body>
+</html>
