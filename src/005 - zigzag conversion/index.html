@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @param {number} numRows
+   * @return {string}
+   */
+  const convert = (s, numRows) => {
+    if (numRows === 1) return s;
+    const maxLen = s.length;
+    let str = '';
+    let increase = 2 * (numRows - 1);
+    for (let i = 0; i < numRows; i++) {
+      let mainIndex = i;
+      let subIndex = increase - i;
+      while (mainIndex < maxLen) {
+        str += s.charAt(mainIndex);
+        mainIndex += increase;
+        if (i !== 0 && i !== numRows - 1) {
+          if (subIndex >= maxLen) break;
+          str += s.charAt(subIndex);
+          subIndex += increase;
+        }
+      }
+    }
+    return str;
+  };
+</script>
+</body>
+</html>
