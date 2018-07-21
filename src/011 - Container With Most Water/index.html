@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} height
+   * @return {number}
+   */
+  const maxArea = height => {
+    let res = 0;
+    let lp = 0;
+    let rp = height.length - 1;
+    let direct = 1;
+    let lastNum = 0;
+    while (lp < rp) {
+      if (direct) {
+        if (height[rp] <= lastNum) {
+          rp--;
+          continue;
+        }
+      } else {
+        if (height[lp] <= lastNum) {
+          lp++;
+          continue;
+        }
+      }
+      res = Math.max(res, (rp - lp) * Math.min(height[lp], height[rp]));
+      direct = height[lp] >= height[rp];
+      if (direct) {
+        lastNum = height[rp];
+        rp--;
+      }
+      else {
+        lastNum = height[lp];
+        lp++;
+      }
+    }
+    return res;
+  };
+</script>
+</body>
+</html>
+1
