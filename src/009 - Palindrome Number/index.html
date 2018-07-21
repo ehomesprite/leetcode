@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} x
+   * @return {boolean}
+   */
+  const isPalindrome = x => {
+    if (x < 0) return false;
+    let y = 0;
+    let n = x;
+    while(n > 0) {
+      const remainder = n % 10;
+      n = (n - remainder) / 10;
+      y = y * 10 + remainder;
+    }
+    return (x === y);
+  };
+</script>
+</body>
+</html>
