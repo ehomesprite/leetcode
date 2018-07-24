@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const digitsToRoman = (num, standardSymbol, carrySymbol, maxSymbol) => {
+    if (num === 0) return '';
+    if (num === 9) return `${standardSymbol}${maxSymbol}`;
+    num++;
+    let [standardLen, carryLen] = [num % 5, Math.floor(num / 5)];
+    standardLen--;
+    let res = '';
+    if (carryLen) res += carrySymbol;
+    if (standardLen > 0) res = res.padEnd(standardLen + carryLen, standardSymbol);
+    if (standardLen < 0) res = res.padStart(2, standardSymbol);
+    return res;
+  };
+  const symbol = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
+  /**
+   * @param {number} num
+   * @return {string}
+   */
+  const intToRoman = num => {
+    let res = '';
+    for (let i = 0; i <= 6; i += 2) {
+      const remainder = num % 10;
+      res = `${digitsToRoman(remainder, symbol[i], symbol[i+1], symbol[i+2])}${res}`;
+      num = (num - remainder) / 10;
+    }
+    return res;
+  };
+</script>
+</body>
+</html>
