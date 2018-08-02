@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+
+  const KeyVal = [
+    [],
+    ['a', 'b', 'c'],
+    ['d', 'e', 'f'],
+    ['g', 'h', 'i'],
+    ['j', 'k', 'l'],
+    ['m', 'n', 'o'],
+    ['p', 'q', 'r', 's'],
+    ['t', 'u', 'v'],
+    ['w', 'x', 'y', 'z'],
+  ];
+
+  const combine = (arr, newArr) => {
+    let res = [];
+    if (arr.length === 0) return newArr;
+    for(let i in arr) {
+      for(let j in newArr) {
+        res.push(arr[i] + newArr[j]);
+      }
+    }
+    return res;
+  };
+  /**
+   * @param {string} digits
+   * @return {string[]}
+   */
+  const letterCombinations = digits => {
+    let res = [];
+    for (let i = 0; i < digits.length; i++) {
+      res = combine(res, KeyVal[+digits[i] - 1]);
+    }
+    return res;
+  };
+</script>
+</body>
+</html>
