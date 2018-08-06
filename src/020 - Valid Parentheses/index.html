@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  const LeftBrace = [
+    '{',
+    '[',
+    '(',
+  ];
+
+  const Pair = {
+    '{': '}',
+    '[': ']',
+    '(': ')',
+  };
+
+  /**
+   * @param {string} s
+   * @return {boolean}
+   */
+  const isValid = s => {
+    const braceStack = [];
+    for (let i of s) {
+      if (LeftBrace.indexOf(i) >= 0) braceStack.push(i);
+      else {
+        if (i !== Pair[braceStack[braceStack.length - 1]]) return false;
+        braceStack.pop();
+      }
+    }
+    return braceStack.length === 0;
+  };
+</script>
+</body>
+</html>

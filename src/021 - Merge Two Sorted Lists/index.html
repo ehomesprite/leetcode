@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  class ListNode {
+    /**
+     * Definition for singly-linked list.
+     */
+    constructor(val) {
+      this.val = val;
+      this.next = null;
+    }
+  }
+
+  /**
+   * createNodeList from arr
+   * @param {number[]} arr
+   */
+  const createNodeList = (arr) => {
+    if (!arr.length) return null;
+    const val = arr.shift();
+    const node = new ListNode(val);
+    node.next = createNodeList(arr);
+    return node;
+  };
+
+  /**
+   * @param {ListNode} l1
+   * @param {ListNode} l2
+   * @return {ListNode}
+   */
+  const mergeTwoLists = (l1, l2) => {
+    let [lp, rp] = [l1, l2];
+    const l3 = new ListNode(null);
+    let p = l3;
+    while(lp && rp) {
+      if (lp.val > rp.val) {
+        p.next = rp;
+        rp = rp.next;
+      } else {
+        p.next = lp;
+        lp = lp.next;
+      }
+      p = p.next;
+    }
+    p.next = lp || rp;
+    return l3.next;
+  };
+</script>
+</body>
+</html>
