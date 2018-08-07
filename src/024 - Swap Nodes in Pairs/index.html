@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  class ListNode {
+    /**
+     * Definition for singly-linked list.
+     */
+    constructor(val) {
+      this.val = val;
+      this.next = null;
+    }
+  }
+
+  /**
+   * createNodeList from arr
+   * @param {number[]} arr
+   */
+  const createNodeList = (arr) => {
+    if (!arr.length) return null;
+    const val = arr.shift();
+    const node = new ListNode(val);
+    node.next = createNodeList(arr);
+    return node;
+  };
+
+  /**
+   * @param {ListNode} head
+   * @return {ListNode}
+   */
+  const swapPairs = head => {
+    let p = head;
+    let b = null;
+    if (!head || !head.next) return head;
+    head = head.next;
+
+    while(p && p.next) {
+      const n = p.next.next;
+      p.next.next = p;
+      if (b) b.next = p.next;
+      p.next = n;
+      b = p;
+      p = p.next;
+    }
+
+    return head;
+  };
+</script>
+</body>
+</html>
