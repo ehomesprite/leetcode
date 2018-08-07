@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const genTree = (ln, rn) => {
+    if (ln === 0 && rn === 0) return [''];
+    if (ln === rn) {
+      return genTree(ln - 1, rn).map((s) => '(' + s);
+    } else if (ln === 0) {
+      return genTree(ln, rn - 1).map(s => ')' + s);
+    } else if (ln < rn) {
+      const arr1 = genTree(ln - 1, rn).map(s => '(' + s);
+      const arr2 = genTree(ln, rn - 1).map(s => ')' + s);
+      return [...arr1, ...arr2];
+    }
+  };
+  /**
+   * @param {number} n
+   * @return {string[]}
+   */
+  const generateParenthesis = n => {
+    return genTree(n, n);
+  };
+</script>
+</body>
+</html>
