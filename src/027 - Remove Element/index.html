@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @param {number} val
+   * @return {number}
+   */
+  const removeElement = (nums, val) => {
+    let [i, j] = [0, 0];
+    while(j < nums.length) {
+      if (nums[j] !== val) {
+        nums[i] = nums[j];
+        i++;
+      }
+      j++;
+    }
+    return i;
+  };
+</script>
+</body>
+</html>
