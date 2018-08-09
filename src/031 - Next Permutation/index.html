@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const sort = (arr, start, end) => {
+    if (start < end) {
+      [arr[start], arr[end]] = [arr[end], arr[start]];
+      let index = start;
+      for (let i = start; i < end; i++) {
+        if (arr[i] < arr[end]) {
+          [arr[i], arr[index]] = [arr[index], arr[i]];
+          index++;
+        }
+      }
+      [arr[end], arr[index]] = [arr[index], arr[end]];
+      sort(arr, start, index - 1);
+      sort(arr, index + 1, end);
+    }
+  };
+  const findMinBigger = (nums, start, end) => {
+    let minIndex = null;
+    for(let i = start + 1; i<=end; i++) {
+      if ((minIndex === null || nums[i] < nums[minIndex]) && nums[i] > nums[start]) {
+        minIndex = i;
+      }
+    }
+    return minIndex;
+  };
+  /**
+   * @param {number[]} nums
+   * @return {void} Do not return anything, modify nums in-place instead.
+   */
+  const nextPermutation = nums => {
+    for (let i = nums.length - 2; i >= 0; i--) {
+      const minBiggerIndex = findMinBigger(nums, i, nums.length - 1);
+      if (minBiggerIndex) {
+        [nums[i], nums[minBiggerIndex]] = [nums[minBiggerIndex], nums[i]];
+        sort(nums, i + 1, nums.length - 1);
+        return;
+      }
+    }
+    sort(nums, 0, nums.length - 1);
+  };
+</script>
+</body>
+</html>
