@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for isBadVersion()
+   *
+   * @param {integer} version number
+   * @return {boolean} whether the version is bad
+   * isBadVersion = function(version) {
+   *     ...
+   * };
+   */
+
+  /**
+   * @param {function} isBadVersion()
+   * @return {function}
+   */
+  var solution = function(isBadVersion) {
+    /**
+     * @param {integer} n Total versions
+     * @return {integer} The first bad version
+     */
+    return function(n) {
+
+    };
+  };
+
+  const find = (n, badVersion) => {
+    const isBadVersion = (v) => v >= badVersion;
+
+    let [min, max] = [1, n];
+
+    while (1) {
+      let mid = Math.floor(max / 2 + min / 2);
+      if (isBadVersion(mid)) {
+        if (mid === 1) return 1;
+        if (!isBadVersion(mid - 1)) return mid;
+        max = mid;
+      } else {
+        if (mid === n - 1) return n;
+        min = mid;
+      }
+    }
+  };
+</script>
+</body>
+</html>
