@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var threeSum = function(nums, target = 0) {
+    const res = [];
+    for (let i = 0; i < nums.length - 2; i++) {
+      const val = nums[i];
+      let [l, r] = [i + 1, nums.length - 1];
+      while (l < r) {
+        const sum = val + nums[l] + nums[r];
+        if (sum === target) {
+          res.push([val, nums[l], nums[r]]);
+          while(nums[l + 1] === nums[l]) l++;
+          while(nums[r - 1] === nums[r]) r--;
+          l++;
+          r--;
+        }
+        else if (sum > target) r--;
+        else l++;
+      }
+      while (nums[i + 1] === val) i++;
+    }
+    return res;
+  };
+
+  const sum = (nums, target, count) => {
+    const res = [];
+    if (count === 3) {
+      return threeSum(nums, target);
+    }
+    for (let i = 0; i < nums.length - count + 1; i++) {
+      const val = nums[i];
+      const ansList = sum(nums.slice(i + 1), target - val, count - 1);
+      ansList.forEach((ans) => {
+        res.push([val, ...ans]);
+      });
+      while(nums[i + 1] === val) i++;
+    }
+    return res;
+  }
+
+  /**
+   * https://leetcode-cn.com/problems/4sum/
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number[][]}
+   */
+  var fourSum = function(nums, target) {
+    nums.sort((a, b) => a - b);
+    return sum(nums, target, 4);
+  };
+</script>
+</body>
+</html>

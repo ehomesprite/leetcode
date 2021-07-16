@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/min-cost-climbing-stairs/
+   * @param {number[]} cost
+   * @return {number}
+   */
+  var minCostClimbingStairs = function(cost) {
+    const len = cost.length;
+    const stack = { [len - 1]: 0, [len - 2]: Math.min(cost[len - 1], cost[len - 2]) };
+    const minCost = (n) => {
+      if (stack[n] !== undefined) return stack[n];
+      if (n >= len) return 0;
+      const res = Math.min(cost[n] + minCost(n + 1), cost[n + 1] + minCost(n + 2));
+      stack[n] = res;
+      return res;
+    };
+    return minCost(0);
+  };
+</script>
+</body>
+</html>

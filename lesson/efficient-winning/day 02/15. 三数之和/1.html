@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/3sum/
+   * @param {number[]} nums
+   * @param target
+   * @return {number[][]}
+   */
+  var threeSum = function(nums, target = 0) {
+    nums.sort((a, b) => a - b);
+    const res = [];
+    for (let i = 0; i < nums.length - 2; i++) {
+      const val = nums[i];
+      let [l, r] = [i + 1, nums.length - 1];
+      while (l < r) {
+        const sum = val + nums[l] + nums[r];
+        if (sum === target) {
+          res.push([val, nums[l], nums[r]]);
+          while(nums[l + 1] === nums[l]) l++;
+          while(nums[r - 1] === nums[r]) r--;
+          l++;
+          r--;
+        }
+        else if (sum > target) r--;
+        else l++;
+      }
+      while (nums[i + 1] === val) i++;
+    }
+    return res;
+  };
+</script>
+</body>
+</html>
