@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/middle-of-the-linked-list/
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   * @return {ListNode}
+   */
+  var middleNode = function(head) {
+    let [mid, last] = [head, head];
+    while (last && last.next) {
+      last = last.next.next;
+      mid = mid.next;
+    }
+    return mid;
+  };
+</script>
+</body>
+</html>
