@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function ListNode(val, next) {
+    this.val = (val === undefined ? 0 : val)
+    this.next = (next === undefined ? null : next)
+  }
+
+  /**
+   * https://leetcode-cn.com/problems/add-two-numbers/
+   *
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  /**
+   * @param {ListNode} l1
+   * @param {ListNode} l2
+   * @param isAdd
+   * @return {ListNode}
+   */
+  var addTwoNumbers = function (l1, l2, isAdd = false) {
+    if (l1 === null && l2 === null && !isAdd) return null;
+    const val = (l1?.val || 0) + (l2?.val || 0) + +isAdd;
+    return new ListNode(val % 10, addTwoNumbers(l1?.next || null, l2?.next || null, val > 9));
+  };
+</script>
+</body>
+</html>
