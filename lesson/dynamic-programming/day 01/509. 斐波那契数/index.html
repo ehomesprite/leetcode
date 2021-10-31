@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const mem = {
+    0: 0,
+    1: 1,
+  };
+
+  /**
+   * https://leetcode-cn.com/problems/fibonacci-number/
+   * @param {number} n
+   * @return {number}
+   */
+  var fib = function(n) {
+    if (mem[n] !== undefined) return mem[n];
+    if (n === 0) return 0;
+    if (n === 1) return 1;
+    const res = fib(n - 1) + fib(n - 2);
+    mem[n] = res;
+    return res;
+  };
+</script>
+</body>
+</html>

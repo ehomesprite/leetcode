@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/max-area-of-island/
+   * @param {number[][]} grid
+   * @return {number}
+   */
+  var maxAreaOfIsland = function (grid) {
+    let maxArea = 0;
+    const pathMap = {};
+    const find = ({grid, x, y, data}) => {
+      const val = grid?.[y]?.[x];
+      if (!val || pathMap[`${y},${x}`]) return;
+      maxArea = Math.max(maxArea, ++data.area);
+      pathMap[`${y},${x}`] = 1;
+      find({grid, x: +x + 1, y, data});
+      find({grid, x: +x - 1, y, data});
+      find({grid, x, y: +y + 1, data});
+      find({grid, x, y: +y - 1, data});
+    };
+    for (let y in grid) {
+      for (let x in grid[y]) {
+        if (grid[y][x] === 1) {
+          find({ grid, x, y, data: { area: 0 } });
+        }
+      }
+    }
+    return maxArea;
+  };
+
+  a = maxAreaOfIsland;
+</script>
+</body>
+</html>

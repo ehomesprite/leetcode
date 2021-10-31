@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
+   * @param {string} s
+   * @return {number}
+   */
+  var lengthOfLongestSubstring = function(s) {
+    const map = {}; // <char: latestIndex>
+    let max = 0;
+    let len = 0;
+    for (let i = 0; i < s.length; i++) {
+      const char = s[i];
+      if (map[char] !== undefined) {
+        len = Math.min(i - map[char], ++len);
+      } else {
+        len++;
+      }
+      max = Math.max(max, len);
+      map[char] = i;
+    }
+    return max;
+  };
+
+  f = lengthOfLongestSubstring;
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/valid-sudoku/
+   * @param {character[][]} board
+   * @return {boolean}
+   */
+  var isValidSudoku = function(board) {
+    const setMap = {}; // 'y1' | 'a1'
+    const getAreaId = (y, x) => {
+      const yTag = Math.floor(y / 3);
+      const xTag = Math.floor(x / 3);
+      return `a-${yTag}-${xTag}`;
+    }
+    const addSet = (val, id) => {
+      if (!setMap[id]) setMap[id] = new Set();
+      setMap[id].add(val);
+    };
+    for (let y = 0; y < 9; y++) {
+      const rowSet = new Set();
+      for (let x = 0; x < 9; x++) {
+        const val = board[y][x];
+        if (val === '.') continue;
+        const areaId = getAreaId(y, x);
+        if (rowSet.has(val) || setMap[x]?.has?.(val) || setMap[areaId]?.has?.(val)) return false;
+        rowSet.add(val);
+        addSet(val, x);
+        addSet(val, areaId);
+      }
+    }
+    return true;
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/flood-fill/
+   * @param {number[][]} image
+   * @param {number} sr
+   * @param {number} sc
+   * @param {number} newColor
+   * @param pathMap
+   * @param startColor
+   * @return {number[][]}
+   */
+  var floodFill = function(image, sr, sc, newColor, pathMap = {}, startColor = image[sr][sc]) {
+    if (image?.[sr]?.[sc] === undefined || image?.[sr]?.[sc] !== startColor || pathMap[`${sr},${sc}`]) return image;
+    image[sr][sc] = newColor;
+    pathMap[`${sr},${sc}`] = 1;
+    floodFill(image, sr + 1, sc, newColor, pathMap, startColor);
+    floodFill(image, sr - 1, sc, newColor, pathMap, startColor);
+    floodFill(image, sr, sc + 1, newColor, pathMap, startColor);
+    floodFill(image, sr, sc - 1, newColor, pathMap, startColor);
+    return image;
+  };
+</script>
+</body>
+</html>

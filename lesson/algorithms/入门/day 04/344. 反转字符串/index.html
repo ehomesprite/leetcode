@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/reverse-string/
+   * @param {character[]} s
+   * @return {void} Do not return anything, modify s in-place instead.
+   */
+  var reverseString = function(s) {
+    let [l, r] = [0, s.length - 1];
+    while (l < r) {
+      const temp = s[l];
+      s[l] = s[r];
+      s[r] = temp;
+      l++;
+      r--;
+    }
+    console.log(s);
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
+   * @param {number[]} numbers
+   * @param {number} target
+   * @return {number[]}
+   */
+  var twoSum = function(numbers, target) {
+    const map = {};
+    for (let i = 0; i < numbers.length; i++) {
+      const val = numbers[i];
+      if (map[val] !== undefined) return [map[val] + 1, i + 1];
+      map[target - val] = i;
+    }
+  };
+</script>
+</body>
+</html>

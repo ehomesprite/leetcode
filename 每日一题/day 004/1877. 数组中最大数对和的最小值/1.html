@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/minimize-maximum-pair-sum-in-array/
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var minPairSum = function(nums) {
+    nums.sort((a, b) => a - b);
+    let l = (nums.length >> 1) - 1;
+    let r = l + 1;
+    let max = 0;
+    while (l >= 0 && r < nums.length) {
+      max = Math.max(nums[l--] + nums[r++], max);
+    }
+    return max;
+  };
+</script>
+</body>
+</html>

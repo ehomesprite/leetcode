@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  /**
+   * https://leetcode-cn.com/problems/two-sum/
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number[]}
+   */
+  var twoSum = function(nums, target) {
+    const map = {};
+    for (let i = 0; i < nums.length; i++) {
+      const val = nums[i];
+      if (map[val] !== undefined) return [map[val], i];
+      map[target - val] = i;
+    }
+  };
+
+  const uniqify = (list) => {
+    const set = new Set();
+    const newList = [];
+    list.forEach((arr) => {
+      const id = arr.toString();
+      if (set.has(id)) return;
+      newList.push(arr);
+      set.add(id);
+    });
+    return newList;
+  };
+
+  const sum = (nums, target, count) => {
+    const res = [];
+    const set = new Set();
+    if (count === 2) { // 以 3sum双指针为基础比较快
+      const map = {};
+      for (let i = 0; i < nums.length; i++) {
+        const val = nums[i];
+        if (set.has(val)) continue;
+        if (map[val] !== undefined) {
+          const ans = [nums[map[val]], nums[i]];
+          set.add(val);
+          res.push(ans);
+        }
+        map[target - val] = i;
+      }
+      return res;
+    }
+    for (let i = 0; i < nums.length - count + 1; i++) {
+      const val = nums[i];
+      if (set.has(val)) continue;
+      set.add(val);
+      const answerList = sum(nums.slice(i + 1), target - val, count - 1);
+      answerList.forEach((ans) => {
+        ans.unshift(val);
+        res.push(ans);
+      });
+    }
+    return res;
+  };
+
+  const f = (nums) => {
+    nums.sort((a, b) => a - b);
+    return sum(nums, 0, 3);
+  }
+</script>
+</body>
+</html>

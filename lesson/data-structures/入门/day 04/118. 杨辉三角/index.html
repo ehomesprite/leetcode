@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/pascals-triangle/
+   * @param {number} numRows
+   * @return {number[][]}
+   */
+  var generate = function(numRows) {
+    const arr = [];
+    for (let r = 0; r < numRows; r++) {
+      const line = [];
+      for (let l = 0; l < r + 1; l++) {
+        if (l === 0 || l === r) line[l] = 1;
+        else line[l] = arr[r - 1][l - 1] + arr[r - 1][l];
+      }
+      arr[r] = line;
+    }
+    return arr;
+  };
+</script>
+</body>
+</html>

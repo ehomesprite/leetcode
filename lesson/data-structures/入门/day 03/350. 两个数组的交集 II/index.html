@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/
+   * @param {number[]} nums1
+   * @param {number[]} nums2
+   * @return {number[]}
+   */
+  var intersect = function(nums1, nums2) {
+    let small, big;
+    if (nums1.length < nums2.length) {
+      small = nums1;
+      big = nums2;
+    } else {
+      small = nums2;
+      big = nums1;
+    }
+
+    const map = {};
+    for (val of small) {
+      map[val] = (map[val] ?? 0) + 1;
+    }
+    const res = [];
+    for (val of big) {
+      if (map[val]) {
+        res.push(val);
+        map[val]--;
+      }
+    }
+    return res;
+  };
+</script>
+</body>
+</html>

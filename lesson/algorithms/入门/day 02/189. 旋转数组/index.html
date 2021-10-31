@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/rotate-array/
+   * @param {number[]} nums
+   * @param {number} k
+   * @return {void} Do not return anything, modify nums in-place instead.
+   */
+  var rotate = function(nums, k) {
+    if (k > nums.length) k = k % nums.length;
+
+    // 方法1
+    // const sub = nums.splice(nums.length - k, k);
+    // nums.splice(0, 0, ...sub);
+
+    // 方法2
+    // const stack = {};
+    // for (let i = nums.length - 1, j=k; i >= 0; i--, j--) {
+    //   if (j > 0) {
+    //     stack[i - nums.length + k] = nums[i];
+    //   }
+    //   nums[i] = nums[i - k] ?? stack[i];
+    // }
+
+    // 方法3
+    nums.reverse();
+    // reverse(0, k-1) & reverse(k)
+
+
+    console.log(nums);
+  };
+</script>
+</body>
+</html>

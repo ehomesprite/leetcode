@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/minimum-absolute-sum-difference/
+   * @param {number[]} nums1
+   * @param {number[]} nums2
+   * @return {number}
+   */
+  var minAbsoluteSumDiff = function(nums1, nums2) {
+    const mod = 10 ** 9 + 7;
+    let sum = 0;
+    let maxChange = 0;
+    const sortList = [...nums1].sort((a, b) => a - b);
+    for (let i in nums1) {
+      const diff = Math.abs(nums1[i] - nums2[i]);
+      sum = sum + diff;
+      const change = diff - search(sortList, nums2[i]);
+      maxChange = Math.max(maxChange, change);
+    }
+    return (sum - maxChange) % mod;
+  };
+
+  const search = (list, target) => {
+    let min = Math.abs(list[1] - target);
+    let [l, r] = [0, list.length];
+    while (l <= r) {
+      let m = l + r >> 1;
+      const val = list[m];
+      min = Math.min(min, Math.abs(val - target));
+      if (l === m) break;
+      if (val > target) {
+        r = m;
+      } else {
+        l = m;
+      }
+    }
+    return min;
+  };
+</script>
+</body>
+</html>

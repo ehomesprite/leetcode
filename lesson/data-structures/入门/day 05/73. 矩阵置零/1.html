@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * https://leetcode-cn.com/problems/set-matrix-zeroes/
+   * @param {number[][]} matrix
+   * @return {void} Do not return anything, modify matrix in-place instead.
+   */
+  var setZeroes = function(matrix) {
+    const sets = {
+      x: new Set(),
+      y: new Set(),
+    };
+
+    for (y in matrix) {
+      for (x in matrix[y]) {
+        if (matrix[y][x] === 0) {
+          sets.x.add(x);
+          sets.y.add(y);
+        }
+      }
+    }
+
+    for (y in matrix) {
+      for (x in matrix[y]) {
+        if (sets.x.has(x) || sets.y.has(y)) matrix[y][x] = 0;
+      }
+    }
+  };
+</script>
+</body>
+</html>
