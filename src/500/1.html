@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string[]} words
+   * @return {string[]}
+   */
+  var findWords = function(words) {
+    const line = [
+      'qwertyuiop',
+      'asdfghjkl',
+      'zxcvbnm',
+    ];
+
+    const res = [];
+    words.forEach((word) => {
+      const char = word.charAt(0).toLowerCase();
+      for (let i = 0; i < 3; i++) {
+        if (line[i].includes(char)) {
+          let legal = true;
+          for (let j = 1; j < word.length; j++) {
+            if (!line[i].includes(word.charAt(j).toLowerCase())) {
+              legal = false;
+              break;
+            }
+          }
+          if (legal) res.push(word);
+          break;
+        }
+      }
+    });
+
+    return res;
+  };
+</script>
+</body>
+</html>
