@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number}
+   */
+  var searchInsert = function(nums, target) {
+    let [l, r] = [0, nums.length - 1];
+    if (nums[l] >= target) return l;
+    if (nums[r] === target) return r;
+    if (nums[r] < target) return r + 1;
+    while(l < r - 1) {
+      const m = Math.floor((l + r) / 2);
+      const val = nums[m];
+      if (val === target) return m;
+      if (val > target) r = m;
+      else l = m;
+    }
+    return r;
+  };
+</script>
+</body>
+</html>
