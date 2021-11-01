@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+  var sortedSquares = function(nums) {
+    let [l, r] = [0, nums.length - 1];
+    const res = [];
+    while(l < r) {
+      const vl = nums[l] ** 2;
+      const vr = nums[r] ** 2;
+
+      if (vl > vr) {
+        res.unshift(vl);
+        l++;
+      }
+      else {
+        res.unshift(vr);
+        r--;
+      }
+    }
+    res.unshift(nums[l] ** 2);
+    return res;
+  };
+</script>
+</body>
+</html>
