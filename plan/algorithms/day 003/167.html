@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} numbers
+   * @param {number} target
+   * @return {number[]}
+   */
+  var twoSum = function(numbers, target) {
+    let [l, r] = [0, numbers.length - 1];
+    while (l < r) {
+      const val = numbers[l] + numbers[r];
+      if (val === target) return [l + 1, r + 1];
+      if (val > target) r--;
+      else l++;
+    }
+    return [];
+  };
+</script>
+</body>
+</html>
