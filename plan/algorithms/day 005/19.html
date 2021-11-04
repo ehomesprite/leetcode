@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  function L(val, next) {
+    this.val = (val === undefined ? 0 : val)
+    this.next = (next === undefined ? null : next)
+  }
+
+  const f = (arr) => {
+    let head, last;
+    arr.forEach((n) => {
+      const l = new L(n);
+      if (!head) head = l;
+      if (last) last.next = l;
+      last = l;
+    });
+    return head;
+  }
+  h = f([1,2,3,4,5]);
+  /**
+   * @param {ListNode} head
+   * @param {number} n
+   * @return {ListNode}
+   */
+  var removeNthFromEnd = function (head, n) {
+    const nodeMap = [];
+    let p = head;
+    let i = 0;
+    while(p) {
+      nodeMap[i] = p;
+      i++;
+      p = p.next;
+    }
+    const len = nodeMap.length - n;
+    if (len === 0) return head.next;
+    nodeMap[len - 1].next = nodeMap[len + 1] || null;
+    return head;
+  };
+
+  var n = removeNthFromEnd;
+</script>
+</body>
+</html>

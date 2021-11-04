@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  const reverse = (str) => {
+    let s = '';
+    for (let char of str) {
+      s = char + s;
+    }
+    return s;
+  };
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  var reverseWords = function(s) {
+    const words = s.split(' ');
+    return words.map(word => reverse(word)).join(' ');
+  };
+</script>
+</body>
+</html>
