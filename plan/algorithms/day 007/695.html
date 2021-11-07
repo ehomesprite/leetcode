@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+    const search = ({ map, x, y, cache, max, area = { val: 0 } }) => {
+      const val = map?.[y]?.[x];
+      if (!val || cache[`${y},${x}`]) {
+        max.val = Math.max(area.val, max.val);
+        return;
+      } else {
+        area.val++;
+        cache[`${y},${x}`] = 1;
+        search({ map, x: +x + 1, y, cache, max, area });
+        search({ map, x: +x - 1, y, cache, max, area });
+        search({ map, x, y: +y + 1, cache, max, area });
+        search({ map, x, y: +y - 1, cache, max, area });
+      }
+    };
+
+    /**
+     * @param {number[][]} grid
+     * @return {number}
+     */
+    var maxAreaOfIsland = function(grid) {
+      const max = { val: 0 };
+      for (let y in grid) {
+        for (let x in grid?.[y]) {
+          if (grid[y][x] === 1) search({ map: grid, x, y, cache: {}, max });
+        }
+      }
+      return max.val;
+    };
+
+  var f = maxAreaOfIsland;
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} image
+   * @param {number} sr
+   * @param {number} sc
+   * @param {number} newColor
+   * @return {number[][]}
+   */
+  var floodFill = function(image, sr, sc, newColor) {
+    const cache = {};
+    const fill = (image, sr, sc, startColor, newColor) => {
+      if (image?.[sr]?.[sc] === undefined || cache[`${sr},${sc}`] || image[sr][sc] !== startColor) return;
+      image[sr][sc] = newColor;
+      cache[`${sr},${sc}`] = 1;
+      fill(image, sr + 1, sc, startColor, newColor);
+      fill(image, sr - 1, sc, startColor, newColor);
+      fill(image, sr, sc - 1, startColor, newColor);
+      fill(image, sr, sc + 1, startColor, newColor);
+    };
+    fill(image, sr, sc, image[sr][sc], newColor);
+    return image;
+  };
+</script>
+</body>
+</html>

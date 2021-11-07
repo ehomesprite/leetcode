@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @return {number}
+   */
+  var lengthOfLongestSubstring = function(s) {
+    let [l, r, max] = [0, 0, 0];
+    let stack = {};
+    while(r < s.length) {
+      const char = s[r];
+      if (stack[char] !== undefined) {
+        max = Math.max(max, r - l);
+        l = stack[char] + 1;
+        r = l;
+        stack = {};
+      } else {
+        stack[char] = r;
+        r++;
+      }
+    }
+    max = Math.max(max, r - l);
+    return max;
+  };
+
+  var f = lengthOfLongestSubstring;
+</script>
+</body>
+</html>

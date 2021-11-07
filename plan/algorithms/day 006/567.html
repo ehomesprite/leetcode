@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s1
+   * @param {string} s2
+   * @return {boolean}
+   */
+  var checkInclusion = function(s1, s2) {
+    const map = {};
+    let diff = 0;
+    for (let char of s1) {
+      map[char] = (map[char] ?? 0) + 1;
+      diff++;
+    }
+    const Diff = diff;
+
+    let [l, r] = [0, 0];
+    const stack = {};
+    while(r < s2.length) {
+      const char = s2[r];
+      if (map[char]) {
+        stack[char] = (stack[char] ?? 0) + 1;
+        if (stack[char] > map[char]) {
+          diff++;
+          while(s2[l] !== char) {
+            stack[s2[l]]--;
+            diff++;
+            l++;
+          }
+          stack[s2[l]]--;
+          diff--;
+          l++;
+        } else {
+          diff--;
+          if (diff === 0) return true;
+        }
+      } else {
+        l = r + 1;
+        for (let key in stack) stack[key] = 0;
+        diff = Diff;
+      }
+      r++;
+    }
+
+    return false;
+  };
+</script>
+</body>
+</html>
