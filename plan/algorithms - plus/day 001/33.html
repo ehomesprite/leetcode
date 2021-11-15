@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number}
+   */
+  var search = function(nums, target) {
+    let rotate = 0;
+    const len = nums.length;
+    for (let i = 0; i < len - 1; i++) {
+      if (nums[i] > nums[i + 1]) rotate = i;
+    }
+
+    let [l, r] = [rotate, nums.length - 1 + rotate];
+    if (nums[r % len] === target) return r % len;
+    if (nums[l % len] === target) return l % len;
+    while (l < r - 1) {
+      const m = Math.floor((l + r) / 2);
+      if (nums[m % len] === target) return m % len;
+      if (nums[m % len] < target) l = m;
+      else r = m;
+    }
+    return -1;
+  };
+</script>
+</body>
+</html>

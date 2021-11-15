@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} matrix
+   * @param {number} target
+   * @return {boolean}
+   */
+  var searchMatrix = function(matrix, target) {
+    let row = -1;
+    for (let i = 0; i < matrix.length; i++) {
+      const list = matrix[i];
+      if (list[0] <= target && list[list.length - 1] >= target) {
+        row = i;
+        return list.includes(target);
+      }
+    }
+    return false;
+  };
+</script>
+</body>
+</html>
