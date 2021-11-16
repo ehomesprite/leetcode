@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} rec
+   * @return {boolean}
+   */
+  var isRectangleCover = function(rec) {
+    const edge = {
+      x: rec[0][0],
+      y: rec[0][1],
+      a: rec[0][2],
+      b: rec[0][3],
+    };
+    const stash = {};
+    const setStash = (x, y) => {
+      const id = `${x},${y}`;
+      stash[id] = (stash[id] ?? 0) + 1;
+    };
+    let sumArea = 0;
+    rec.forEach(([x, y, a, b]) => {
+      if (x < edge.x) edge.x = x;
+      if (y < edge.y) edge.y = y;
+      if (a > edge.a) edge.a = a;
+      if (b > edge.b) edge.b = b;
+      setStash(x, y);
+      setStash(a, b);
+      setStash(x, b);
+      setStash(a, y);
+
+      sumArea += (a - x) * (b - y);
+    });
+
+    const edgeArea = (edge.a - edge.x) * (edge.b - edge.y);
+
+    if (edgeArea !== sumArea) return false;
+
+    const edgeIdList = [`${edge.x},${edge.y}`, `${edge.a},${edge.b}`, `${edge.a},${edge.y}`, `${edge.x},${edge.b}`];
+
+    for (let id in stash) {
+      if (!edgeIdList.includes(id) && ![2,4].includes(stash[id])) return false;
+      if (edgeIdList.includes(id) && stash[id] !== 1) return false;
+    }
+
+    return true;
+  };
+</script>
+</body>
+</html>
