@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var findMin = function(nums) {
+    if (nums.length <= 1) return nums[0];
+    let [l, r] = [0, nums.length - 1];
+    if (nums[l] < nums[r]) return nums[l];
+    while(1) {
+      const m = Math.floor((l+r) / 2);
+      if (nums[m] > nums[m + 1]) return nums[m + 1];
+      if (nums[m - 1] > nums[m]) return nums[m];
+      if (nums[m] > nums[l]) {
+        l = m;
+      } else {
+        r = m;
+      }
+    }
+  };
+</script>
+</body>
+</html>

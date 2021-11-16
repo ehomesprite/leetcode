@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var findPeakElement = function(nums) {
+    let [l, r] = [0, nums.length - 1];
+    const check = (n) => {
+      return (nums[n] > (nums[n - 1] ?? -Infinity))
+        && (nums[n] > (nums[n + 1] ?? -Infinity));
+    }
+    if (check(r)) return r;
+    while(1) {
+      let m = Math.floor((l+r) / 2);
+      if (check(m)) return m;
+
+      if (nums[m] > (nums[m - 1] ?? -Infinity)) { // grow
+        l = m;
+      } else {
+        r = m;
+      }
+    }
+  };
+</script>
+</body>
+</html>
