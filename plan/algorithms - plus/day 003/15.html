@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var threeSum = function(nums, target = 0) {
+    const result = new Set();
+    nums.sort((a, b) => a - b);
+
+    for (let i = 0; i < nums.length - 2; i++) {
+      let [l, r] = [i + 1, nums.length - 1];
+      while(l < r) {
+        const [val, valL, valR] = [nums[i], nums[l], nums[r]];
+        const sum = val + valL + valR;
+        if (sum === target) {
+          result.add(`${val},${valL},${valR}`);
+          r--;
+          l++;
+        }
+        else if (sum < target) l++;
+        else r--;
+      }
+    }
+
+    return [...result].map((key) => {
+      const arr = key.split(',');
+      return arr.map(n => +n);
+    });
+  }
+</script>
+</body>
+</html>
