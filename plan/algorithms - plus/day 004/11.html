@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} height
+   * @return {number}
+   */
+  var maxArea = function(height) {
+    let [l, r] = [0, height.length - 1];
+    let area = 0;
+    while(l < r) {
+      let h1 = height[l];
+      let h2 = height[r];
+      area = Math.max(area, Math.min(h1, h2) * (r - l));
+      if (h1 <= h2) {
+        l++;
+      } else {
+        r--;
+      }
+    }
+    return area;
+  };
+</script>
+</body>
+</html>
