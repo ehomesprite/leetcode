@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @param {string} t
+   * @return {boolean}
+   */
+  var backspaceCompare = function(s, t) {
+    let [i, j] = [s.length - 1, t.length - 1]
+
+    while(i >= 0 || j >= 0) {
+      let d = 0;
+      if (s[i] === '#') d += 2;
+      while(d) {
+        i--; d--;
+        if (s[i] === '#') d += 2;
+      }
+      if (t[j] === '#') d += 2;
+      while(d) {
+        j--; d--;
+        if (t[j] === '#') d += 2;
+      }
+      const [v1, v2] = [s[i], t[j]];
+      if (v1 !== v2) return false;
+      i--;
+      j--;
+    }
+
+    return true;
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} firstList
+   * @param {number[][]} secondList
+   * @return {number[][]}
+   */
+  var intervalIntersection = function(firstList, secondList) {
+    let [i, j] = [0, 0];
+    const result = [];
+    while(i < firstList.length && j < secondList.length) {
+      const [range1, range2] = [firstList[i], secondList[j]];
+      if (range1[1] < range2[0]) {
+        i++;
+      } else if (range1[0] > range2[1]) {
+        j++;
+      } else {
+        result.push([Math.max(range1[0], range2[0]), Math.min(range1[1], range2[1])]);
+        if (range1[1] < range2[1]) i++;
+        else j++;
+      }
+    }
+    return result;
+  };
+</script>
+</body>
+</html>
