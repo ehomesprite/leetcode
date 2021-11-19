@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @param {number} k
+   * @return {number}
+   */
+  var numSubarrayProductLessThanK = function(nums, k) {
+    let [l, r] = [0, 0];
+    const getProduct = () => {
+      let product = 1;
+      for (let i = l; i <= r; i++) product *= nums[i];
+      return product;
+    };
+
+    let res = 0;
+
+    while(r < nums.length) {
+      if (getProduct() < k) {
+        res += (r - l) + 1;
+        r++;
+      } else {
+        if (l === r) r++;
+        l++;
+      }
+    }
+
+    return res;
+  };
+  var f = numSubarrayProductLessThanK;
+</script>
+</body>
+</html>

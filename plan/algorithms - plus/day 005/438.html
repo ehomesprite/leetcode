@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @param {string} p
+   * @return {number[]}
+   */
+  var findAnagrams = function(s, p) {
+    const map = {};
+    map.diff = 0;
+    [].forEach.call(p, (char) => {
+      map[char] = (map[char] ?? 0) + 1;
+      map.diff++;
+    });
+
+    const checkSub = (n) => {
+      const stack = {};
+      let diff = map.diff;
+      while(n < s.length) {
+        const char = s[n];
+        if (map[char]) {
+          stack[char] = (stack[char] ?? 0) + 1;
+          if (stack[char] <= map[char]) {
+            diff--;
+            n++;
+            if (diff === 0) return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+      return false;
+    };
+
+    const result = [];
+    for (let i = 0; i < s.length - p.length + 1; i++) {
+      const isSub = checkSub(i);
+      if (isSub) result.push(i);
+    }
+    return result;
+  };
+</script>
+</body>
+</html>
