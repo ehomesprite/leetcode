@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string[][]} grid
+   * @return {number}
+   */
+  var numIslands = function(grid) {
+    const stash = {};
+    let islandNum = 0;
+    const clearIsland = (y, x) => {
+      const id = y+'.'+x;
+      if (stash[id] || grid[y]?.[x] !== '1') return;
+      grid[y][x] = '0';
+      stash[id] = 1;
+      clearIsland(y+1,x);
+      clearIsland(y-1,x);
+      clearIsland(y,x+1);
+      clearIsland(y,x-1);
+    }
+    for (let y = 0; y < grid.length; y++) {
+      for (let x = 0; x < grid[y].length; x++) {
+        if (grid[y][x] === '1') {
+          islandNum++;
+          clearIsland(y,x);
+        }
+      }
+    }
+  };
+</script>
+</body>
+</html>
