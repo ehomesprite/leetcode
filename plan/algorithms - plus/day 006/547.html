@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} isConnected
+   * @return {number}
+   */
+  var findCircleNum = function(isConnected) {
+    const len = isConnected[0].length;
+    const linkMap = {};
+    let num = len;
+    const link = (i, j) => {
+      linkMap[i].forEach(x => {
+        linkMap[x] = linkMap[x].concat(linkMap[j]);
+      });
+      linkMap[j].forEach(x => {
+        linkMap[x] = linkMap[i];
+      });
+    };
+    isConnected.forEach((route, m) => {
+      if (!linkMap[m]) linkMap[m] = [m];
+      route.forEach((val, n) => {
+        if (!linkMap[n]) linkMap[n] = [n];
+        if (n === m || val === 0) return;
+        if (linkMap[m].includes(n)) return;
+        num -= 1;
+        link(n, m);
+      });
+    });
+
+    return num;
+  };
+</script>
+</body>
+</html>

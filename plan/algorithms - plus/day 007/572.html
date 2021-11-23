@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val, left, right) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.left = (left===undefined ? null : left)
+   *     this.right = (right===undefined ? null : right)
+   * }
+   */
+  function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+  }
+
+  /**
+   * @param {TreeNode} root
+   * @param {TreeNode} subRoot
+   * @return {boolean}
+   */
+  var isSubtree = function(root, subRoot) {
+    const isEquaTree = (node1, node2) => {
+      if (node1?.val !== node2?.val) return false;
+      if (node1 === null && node2 === null) return true;
+      return isEquaTree(node1.left, node2.left) && isEquaTree(node1.right, node2.right);
+    };
+    const find = (node) => {
+      if (node === null) return false;
+      if (node.val === subRoot.val) {
+        const equa = isEquaTree(node, subRoot);
+        if (equa) return equa;
+      }
+      return find(node.right) || find(node.left);
+    };
+
+    return find(root);
+  };
+</script>
+</body>
+</html>

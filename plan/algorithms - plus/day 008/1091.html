@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} grid
+   * @return {number}
+   */
+  var shortestPathBinaryMatrix = function(grid) {
+    const len = grid.length;
+    if (grid[0][0] !== 0 || grid[len - 1][len - 1] !== 0) return -1;
+    if (len === 1) return 1;
+    const q = [[0, 0]];
+    let step = 1;
+    while(q.length) {
+      step++;
+      let l = q.length;
+      while (l--) {
+        let [y, x] = q.shift();
+        const nextArr = [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [-1, -1], [1, -1], [-1, 1]];
+        for (let i = 0; i < nextArr.length; i++) {
+          let y1 = y + nextArr[i][0];
+          let x1 = x + nextArr[i][1];
+          if (y1 === len - 1 && x1 === len - 1) return step;
+          if (y1 >= len || y1 < 0 || x1 >= len || x1 < 0 || grid[y1][x1] !== 0) continue;
+          grid[y1][x1] = 1;
+          q.push([y1, x1]);
+        }
+      }
+    }
+    return -1;
+  };
+
+  var f = shortestPathBinaryMatrix;
+</script>
+</body>
+</html>

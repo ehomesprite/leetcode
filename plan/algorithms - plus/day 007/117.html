@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * // Definition for a Node.
+   * function Node(val, left, right, next) {
+   *    this.val = val === undefined ? null : val;
+   *    this.left = left === undefined ? null : left;
+   *    this.right = right === undefined ? null : right;
+   *    this.next = next === undefined ? null : next;
+   * };
+   */
+
+  function Node(val, left, right, next) {
+     this.val = val === undefined ? null : val;
+     this.left = left === undefined ? null : left;
+     this.right = right === undefined ? null : right;
+     this.next = next === undefined ? null : next;
+  }
+
+  const root = new Node(1, new Node(2, new Node(4), new Node(5)), new Node(3, null, new Node(7)));
+
+  /**
+   * @param {Node} root
+   * @return {Node}
+   */
+  var connect = function(root) {
+    if (root === null) return null;
+    const stack = {};
+    const find = (node, layer) => {
+      if (!node) return;
+      if (stack[layer]) {
+        node.next = stack[layer];
+      }
+      stack[layer] = node;
+      find(node.right, layer + 1);
+      find(node.left, layer + 1);
+    };
+    find(root, 0);
+
+    return root;
+  };
+</script>
+</body>
+</html>

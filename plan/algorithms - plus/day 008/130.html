@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var solve = function(board) {
+    const yLen = board.length;
+    const xLen = board[0].length;
+    const stack = {};
+    let isAlive
+    const find = (y, x, list) => {
+      const id = y+'.'+x;
+      if (y >= yLen || y < 0 || x >= xLen || x < 0) {
+        isAlive = true;
+        return;
+      }
+      if (stack[id] || board[y][x] !== 'O') return;
+      list.push([y, x]);
+      stack[id] = 1;
+      find(y + 1, x, list);
+      find(y - 1, x, list);
+      find(y, x + 1, list);
+      find(y, x - 1, list);
+    };
+    for (let y = 0; y < yLen; y++) {
+      for (let x = 0; x < xLen; x++) {
+        if (board[y][x] === 'O') {
+          isAlive = false;
+          const list = [];
+          find(y, x, list);
+          if (isAlive) continue;
+          list.forEach(([y, x]) => {
+            board[y][x] = 'X';
+          })
+        }
+      }
+    }
+    console.log(board);
+  };
+</script>
+</body>
+</html>
