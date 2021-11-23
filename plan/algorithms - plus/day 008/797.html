@@ -11,7 +11,25 @@
    * @return {number[][]}
    */
   var allPathsSourceTarget = function(graph) {
-
+    const path = [[0]];
+    const res = [];
+    while(path.length) {
+      let len = path.length;
+      while(len--) {
+        const route = path.shift();
+        const last = route[route.length - 1];
+        if (last === graph.length - 1) {
+          res.push(route);
+          continue;
+        }
+        if (graph[last]?.length) {
+          graph[last].forEach((next) => {
+            path.push([...route, next]);
+          });
+        }
+      }
+    }
+    return res;
   };
 
   var f = allPathsSourceTarget;

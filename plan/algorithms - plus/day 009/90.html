@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number[][]}
+   */
+  var subsets = function(nums) {
+    nums.sort((a, b) => a - b);
+    const ans = [[]];
+    const find = (n, list) => {
+      if (n >= nums.length) return;
+      for (let i = n; i < nums.length; i++) {
+        if (nums[i] === nums[i - 1] && i !== n) continue;
+        list.push(nums[i]);
+        ans.push(list.slice());
+        find(i + 1, list);
+        list.pop();
+      }
+    };
+    find(0, []);
+    return ans;
+  };
+
+  /**
+   * @param {number[]} nums
+   * @return {number[][]}
+   */
+  var subsetsWithDup = function(nums) {
+    const sub = subsets(nums);
+    const set = new Set();
+    sub.forEach((arr) => {
+      arr.sort((a, b) => a-b);
+      set.add(arr.join(','));
+    });
+    const ans = [...set].map(a => {
+      const arr = a.split(',')
+      const r = arr.map(n => n === '' ? '' : +n);
+      if (r[0] === '') r.length = 0;
+      return r;
+    });
+    return ans;
+  };
+  var f = subsetsWithDup;
+</script>
+</body>
+</html>

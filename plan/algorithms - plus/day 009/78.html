@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number[][]}
+   */
+  var subsets = function(nums) {
+    const ans = [[]];
+    const find = (n, list) => {
+      if (n >= nums.length) return;
+      for (let i = n; i < nums.length; i++) {
+        list.push(nums[i]);
+        ans.push(list.slice());
+        find(i + 1, list);
+        list.pop();
+      }
+    };
+    find(0, []);
+    return ans;
+  };
+</script>
+</body>
+</html>
