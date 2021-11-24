@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var combinationSum2 = function(can, target) {
+    can.sort((a, b) => a - b);
+    const len = can.length;
+    const ans = [];
+    const find = (target, list, stack, n = 0) => {
+      if (target === 0) {
+        ans.push(list.slice());
+        return;
+      }
+      for (let i = n; i < len; i++) {
+        if (can[i] > target || stack[i]) continue;
+        if (can[i] === can[i - 1] && i !== n) continue;
+        stack[i] = 1;
+        list.push(can[i]);
+        find(target - can[i], list, stack, i + 1);
+        stack[i] = 0;
+        list.pop();
+      }
+
+    };
+    find(target, [], []);
+    return ans;
+  };
+  var f =combinationSum2;
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var combinationSum = function(can, target) {
+    const len = can.length;
+    const ans = [];
+    const find = (target, list, n) => {
+      if (target === 0) {
+        ans.push(list.slice());
+        return;
+      }
+      for (let i = n; i < len; i++) {
+        if (can[i] > target) continue;
+        list.push(can[i]);
+        find(target - can[i], list, i);
+        list.pop();
+      }
+
+    };
+    find(target, [], 0);
+    return ans;
+  };
+  var f = combinationSum;
+</script>
+</body>
+</html>
