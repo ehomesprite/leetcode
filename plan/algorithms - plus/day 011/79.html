@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {String[][]} board
+   * @param {string} word
+   * @return {boolean}
+   */
+  var exist = function(board, word) {
+    let isExist
+    const stack = {};
+    const find = (y, x, step) => {
+      if (step === word.length) { isExist = true; return; }
+      if (isExist || y >= board.length || y < 0 || x >= board[y].length || x < 0) return;
+      const id = y + '.' + x;
+      const val = board[y][x];
+      const target = word[step];
+      if (val !== target || stack[id]) return;
+      stack[id] = 1;
+      find(y + 1, x, step + 1);
+      find(y, x + 1, step + 1);
+      find(y - 1, x, step + 1);
+      find(y, x - 1, step + 1);
+      stack[id] = 0;
+    };
+
+    for (let y = 0; y < board.length; y++) {
+      for (let x = 0; x < board[y].length; x++) {
+        if (board[y][x] === word[0]) {
+          find(y, x, 0);
+        }
+      }
+    }
+
+    return !!isExist;
+  };
+</script>
+</body>
+</html>

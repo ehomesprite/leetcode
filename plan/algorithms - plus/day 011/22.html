@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @return {string[]}
+   */
+  var generateParenthesis = function(n) {
+    const ans = [];
+    let open = 0;
+    let close = 0;
+    const exec = (str) => {
+      if (str.length === n * 2) {
+        ans.push(str);
+        return;
+      }
+      if (open < n) {
+        open++;
+        exec(`${str}(`);
+        open--;
+      }
+
+      if (close < open) {
+        close++;
+        exec(`${str})`);
+        close--;
+      }
+
+
+    };
+    exec('');
+    return ans;
+  };
+  var f = generateParenthesis;
+</script>
+</body>
+</html>
