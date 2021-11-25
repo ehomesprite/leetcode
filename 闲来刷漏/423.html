@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const charMap = [
+    { // 0
+      z: 1,
+      e: 1,
+      r: 1,
+      o: 1,
+    }, { // 1
+      o: 1,
+      n: 1,
+      e: 1,
+    }, { // 2
+      t: 1,
+      w: 1,
+      o: 1,
+    }, { // 3
+      t: 1,
+      h: 1,
+      r: 1,
+      e: 2,
+    }, { // 4
+      f: 1,
+      o: 1,
+      u: 1,
+      r: 1,
+    }, { // 5
+      f: 1,
+      i: 1,
+      v: 1,
+      e: 1,
+    }, { // 6
+      s: 1,
+      i: 1,
+      x: 1,
+    }, { // seven
+      s: 1,
+      e: 2,
+      v: 1,
+      n: 1,
+    }, { // eight
+      e: 1,
+      i: 1,
+      g: 1,
+      h: 1,
+      t: 1,
+    }, { // nine
+      n: 2,
+      i: 1,
+      e: 1,
+    }
+  ]
+
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  var originalDigits = function (s) {
+    const map = {};
+    const len = s.length;
+    let diff = len;
+    for (let i = 0; i < len; i++) {
+      const char = s[i];
+      map[char] = (map[char] ?? 0) + 1;
+    }
+    const ans = [];
+    const extract = (n, map) => {
+      const charSet = charMap[n];
+      for (let char in charSet) {
+        if (!map[char] || map[char] < charSet[char]) return false;
+      }
+      for (let char in charSet) {
+        map[char] -= charSet[char];
+        diff -= charSet[char];
+      }
+      return true;
+    };
+    const unextract = (n, map) => {
+      const charSet = charMap[n];
+      for (let char in charSet) {
+        map[char] += charSet[char];
+        diff += charSet[char];
+      }
+    };
+    let res;
+    const find = () => {
+      if (res) return;
+      if (diff === 0) {
+        res = ans.join('');
+        return;
+      }
+      for (let i = 0; i < 10; i++) {
+        const legal = extract(i, map);
+        if (!legal) continue;
+        else {
+          ans.push(i);
+          find();
+          unextract(i, map);
+          ans.pop();
+        }
+      }
+    };
+    find()
+    return res;
+  };
+  var f = originalDigits;
+</script>
+
+</body>
+</html>
