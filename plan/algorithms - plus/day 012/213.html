@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var _rob = (nums, n, cache = {}) => {
+    if (n === 0) return nums[0];
+    if (n === 1) return Math.max(nums[0], nums[1]);
+    if (cache[n] !== undefined) return cache[n];
+    const val = Math.max(_rob(nums, n - 2, cache) + nums[n], _rob(nums, n - 1, cache));
+    cache[n] = val;
+    return val;
+  };
+
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var rob = function(nums) {
+    const n = nums.length;
+    if (n === 1) return nums[0];
+    if (n === 2) return Math.max(...nums);
+    return Math.max(_rob(nums, n - 2), _rob(nums.slice(1), n - 2));
+  };
+</script>
+</body>
+</html>
