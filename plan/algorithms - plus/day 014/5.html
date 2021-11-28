@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  var longestPalindrome = function(s) {
+    let max = 1;
+    let ans = s[0];
+    let i = 1;
+    while(i < s.length) {
+      if (s[i] !== s[i - 1] && s[i] !== s[i - 2]) {
+        i++;
+        continue;
+      }
+      const check = (l, r, len) => {
+        while(r < s.length && l >= 0) {
+          if (s[l] !== s[r]) break;
+          len += 2;
+          if (len > max) {
+            max = len;
+            ans = s.slice(l, r + 1);
+          }
+          r++;
+          l--;
+        }
+      };
+      if (s[i] === s[i - 2]) {
+        check(i - 2, i, 1);
+      }
+      if (s[i] === s[i - 1]) {
+        check(i - 1, i, 0);
+      }
+      i++;
+    }
+    return ans;
+  };
+
+  var f = longestPalindrome;
+</script>
+</body>
+</html>

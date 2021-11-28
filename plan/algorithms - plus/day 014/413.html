@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const sum = (n) => {
+    return (n + 1) * n * 0.5;
+  }
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var numberOfArithmeticSlices = function(nums) {
+    if (nums.length < 3) return 0;
+    let ans = 0;
+    for (let i = 2; i < nums.length;i++) {
+      if (nums[i] - nums[i - 1] !== nums[i - 1] - nums[i - 2]) continue;
+      let len = 3;
+      const diff = nums[i] - nums[i - 1];
+      let r = i + 1;
+      while(r < nums.length) {
+        if (nums[r] - nums[r - 1] === diff) {
+          len++;
+          r++;
+        } else {
+          break;
+        }
+      }
+      ans += sum(len - 2);
+      i = r - 1;
+    }
+    return ans;
+  };
+
+  var f = numberOfArithmeticSlices;
+</script>
+</body>
+</html>
