@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var findNumberOfLIS = (nums) => {
+    let max = 0;
+    let count = 0;
+    const dp = [];
+    const countMap = [];
+    const f = (n) => {
+      dp[n] = 1;
+      countMap[n] = 1;
+      if (dp[n] === max) count++;
+      else if (dp[n] > max) {
+        max = dp[n];
+        count = 1;
+      }
+      for (let i = 0; i < n; i++) {
+        const val = dp[i] + 1;
+        if (val < dp[n]) continue;
+        if (nums[i] < nums[n]) {
+          dp[n] = val;
+          if (dp[n] === max) {
+            count += countMap[i];
+            countMap[n] = count;
+          }
+          else if (dp[n] > max) {
+            max = dp[n];
+            count = countMap[i];
+            countMap[n] = count;
+          }
+        }
+      }
+    }
+    let step = 0;
+    while(step < nums.length) f(step++);
+    return count;
+  };
+
+  var f = findNumberOfLIS;
+</script>
+</body>
+</html>

@@ -6,7 +6,39 @@
 </head>
 <body>
 <script>
+  /**
+   * @param {string} s
+   * @return {number}
+   */
+  var numDecodings = function(s) {
+    const cache = {};
+    const check = (l, r) => {
+      if (s[l] === '0') return false;
+      const n = (+s[l] * 10 + +s[r]);
+      return n <= 26 && n > 0;
 
+    }
+    const f = (l, r) => {
+      const id = l + '-' + r;
+      if (cache[id] !== undefined) return cache[id];
+      let val;
+      if (r === l) { // 1 place
+        if (s[l] === '0') val = 0;
+        else val = 1;
+      } else if (r - l === 1) { // 2 places
+        const n = (+s[l] * 10 + +s[r]);
+        let temp = +check(l, r);
+        val = temp + (f(l,l) && f(r,r));
+      } else {
+        val = (f(r,r) * f(l, r - 1)) + (+check(r - 1, r) * f(l, r - 2));
+      }
+      cache[id] = val;
+      return val;
+    };
+    return f(0, s.length - 1);
+  };
+
+  var f = numDecodings;
 </script>
 </body>
 </html>
