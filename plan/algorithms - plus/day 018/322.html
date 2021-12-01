@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} coins
+   * @param {number} amount
+   * @return {number}
+   */
+  var coinChange = function(coins, amount) {
+    const f = (target, cache = []) => {
+      if (target === 0) return 0;
+      if (target < 0) return -1;
+      if (cache[target] !== undefined) return cache[target];
+      let minCount = -1;
+      for (let i = 0; i < coins.length; i++) {
+        const coin = coins[i];
+        if (coin > target) continue;
+        const rest = target - coin;
+        const count = cache[rest];
+        if (count === -1) continue;
+        if (minCount === -1 || count + 1 < minCount) minCount = count + 1;
+      }
+      cache[target] = minCount;
+      return minCount;
+    };
+    const cache = [0];
+    let n = 0;
+    while(n++ <= amount) f(n, cache);
+    return cache[amount];
+  };
+</script>
+</body>
+</html>
