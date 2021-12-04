@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} m
+   * @param {number} n
+   * @param {number} k
+   * @return {number}
+   */
+  var movingCount = function(m, n, k) {
+    const map = new Array(m).fill(0).map(x => new Array(n));
+    let count = 1;
+    map[0][0] = 1;
+    const start = [[0, 0]];
+    const isLegal = (y, x) => {
+      let sum = 0;
+      while(y > 0) {
+        sum += y % 10;
+        y = Math.floor(y / 10);
+      }
+      while(x > 0) {
+        sum += x % 10;
+        x = Math.floor(x / 10);
+      }
+      return sum <= k;
+    };
+    const find = (sy, sx) => {
+      const stepArr = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+      stepArr.forEach(([dy, dx]) => {
+        const [y, x] = [sy + dy, sx + dx];
+        if (y >= m || y < 0 || x >= n || x < 0 || map[y][x] || !isLegal(y, x)) return;
+        count += 1;
+        map[y][x] = 1;
+        start.push([y, x]);
+      });
+    };
+    while(start.length) {
+      let n = start.length;
+      while(n--) {
+        const [sy, sx] = start.shift();
+        find(sy, sx);
+      }
+    }
+
+    console.log(map);
+    return count;
+  };
+
+  var f = movingCount;
+</script>
+</body>
+</html>
