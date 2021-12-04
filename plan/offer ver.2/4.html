@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var findNumberIn2DArray = function(matrix, target) {
+    for (let y = 0; y < matrix.length; y++) {
+      const row = matrix[y];
+      const len = row.length;
+      if (row[0] === target || row[len - 1] === target) return true;
+      if (row[0] < target && row[len - 1] > target) {
+        if (row.includes(target)) return true;
+      }
+    }
+    return false;
+  };
+</script>
+</body>
+</html>

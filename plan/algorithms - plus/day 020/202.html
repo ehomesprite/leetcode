@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @return {boolean}
+   */
+  var isHappy = function(n) {
+    const cache = [];
+    const list = [];
+    let val = n;
+    while(1) {
+      while(val) {
+        list.push(val % 10);
+        val = Math.floor(val / 10);
+      }
+      val = 0;
+      list.forEach((num) => { val += num ** 2; });
+      if (val === 1) return true;
+      if (cache[val]) return false;
+      list.length = 0;
+      cache[val] = 1;
+    }
+  };
+</script>
+</body>
+</html>

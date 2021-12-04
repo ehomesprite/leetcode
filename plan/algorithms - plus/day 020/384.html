@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   */
+  var Solution = function(nums) {
+    this._source = nums;
+  };
+
+  /**
+   * @return {number[]}
+   */
+  Solution.prototype.reset = function() {
+    return this._source;
+  };
+
+  const getRandomNum = (max) => Math.floor(Math.random() * max);
+
+  /**
+   * @return {number[]}
+   */
+  Solution.prototype.shuffle = function() {
+    const data = this._source.slice();
+    const result = [];
+    while(data.length) {
+      const n = getRandomNum(data.length);
+      result.push(data[n]);
+      data.splice(n, 1);
+    }
+    return result;
+  };
+
+  /**
+   * Your Solution object will be instantiated and called as such:
+   * var obj = new Solution(nums)
+   * var param_1 = obj.reset()
+   * var param_2 = obj.shuffle()
+   */
+</script>
+</body>
+</html>

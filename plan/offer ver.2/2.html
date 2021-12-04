@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var fib = function(n, cache = []) {
+    if (n === 0) return 0;
+    if (n === 1) return 1;
+    if (cache[n] !== undefined) return cache[n];
+    const val = (fib(n - 1, cache) + fib(n - 2, cache)) % (1e9 + 7);
+    cache[n] = val;
+    return val;
+  };
+</script>
+</body>
+</html>

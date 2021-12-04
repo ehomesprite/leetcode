@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @return {number}
+   */
+  var numWays = function(n, cache = []) {
+    if (n === 0) return 1;
+    if (n === 1) return 1;
+    if (n === 2) return 2;
+    if (cache[n]) return cache[n];
+    const val = (numWays(n - 2, cache) + numWays(n - 1, cache)) % (1e9 + 7);
+    cache[n] = val;
+    return val;
+  };
+</script>
+</body>
+</html>

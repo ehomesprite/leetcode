@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 数学办法
+  // var getResult = (n, x) => {
+  //   let extra = 0;
+  //   let nums = new Array(x).fill(n / x);
+  //   nums = nums.map((num) => {
+  //     const intNum = Math.floor(num);
+  //     extra += num - intNum;
+  //     if (extra >= 0.9999) {
+  //       extra -= 1;
+  //       return intNum + 1;
+  //     }
+  //     return intNum;
+  //   });
+  //   return nums.reduce((prev = 1, curr) => prev * curr);
+  // };
+  // /**
+  //  * @param {number} n
+  //  * @return {number}
+  //  */
+  // var integerBreak = function (n) {
+  //   let max = 0;
+  //   let prev = 0;
+  //   let i = 2;
+  //   while(1) {
+  //     const result = getResult(n, i++);
+  //     if (result < prev) break;
+  //     prev = result;
+  //     max = Math.max(result, max);
+  //   }
+  //   return max;
+  // };
+
+
+  var integerBreak = function (n) {
+    const dp = new Array(n + 1).fill(0);
+    for (let i = 2; i <= n; i++) {
+      let max = 0;
+      for (let j = 1; j < i; j++) {
+        const rest = i - j;
+        max = Math.max(max, j * rest, j * dp[rest]);
+      }
+      dp[i] = max;
+    }
+    return dp[n];
+  };
+</script>
+</body>
+</html>

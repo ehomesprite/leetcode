@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @return {number}
+   */
+  var maxPower = function(s) {
+    let max = 1;
+    let power = 1;
+    let lastChar = s[0];
+    for (let i = 1; i < s.length; i++) {
+      const char = s[i];
+      if (char === lastChar) {
+        power += 1;
+      }
+      else {
+        power = 1;
+        lastChar = char;
+      }
+      max = Math.max(max, power)
+    }
+    return max;
+  };
+</script>
+</body>
+</html>
