@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val) {
+   *     this.val = val;
+   *     this.next = null;
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   * @return {number[]}
+   */
+  var reversePrint = function(head) {
+    const res = [];
+    while(head) {
+      res.unshift(head.val);
+      head = head.next;
+    }
+    return res;
+  };
+</script>
+</body>
+</html>

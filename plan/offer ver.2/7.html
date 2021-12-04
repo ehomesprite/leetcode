@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+  }
+
+  /**
+   * @param {number[]} preorder DLR
+   * @param {number[]} inorder LDR
+   * @return {TreeNode}
+   */
+  var buildTree = function (preorder, inorder) {
+    if (!preorder.length) return null;
+    let head;
+    const root = preorder[0];
+    const inOrderRootIndex = inorder.indexOf(root);
+    const lInorder = inorder.slice(0, inOrderRootIndex);
+    const rInorder = inorder.slice(inOrderRootIndex + 1);
+    const lPreorder = preorder.slice(1, lInorder.length + 1);
+    const rPreorder = preorder.slice(lInorder.length + 1);
+    head = new TreeNode(root);
+    head.left = buildTree(lPreorder, lInorder);
+    head.right = buildTree(rPreorder, rInorder);
+    return head;
+  };
+</script>
+</body>
+</html>
