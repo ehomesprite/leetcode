@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} matrix
+   * @return {number[]}
+   */
+  var spiralOrder = function(matrix) {
+    if (matrix.length === 0) return [];
+    let [lenY, lenX] = [matrix.length, matrix[0].length];
+    const res = [];
+    const cutBorder = (maxY, maxX) => {
+      const [minY, minX] = [lenY - maxY - 1, lenX - maxX - 1];
+      if (minY > maxY || minX > maxX) return;
+      let [y, x] = [minY, minX];
+      if (minY === maxY && minX === maxX) {
+        res.push(matrix[y][x]);
+        return;
+      } else if (minY === maxY) {
+        while(x <= maxX) {
+          res.push(matrix[y][x]);
+          x++;
+        }
+        return;
+      } else if (minX === maxX) {
+        while(y <= maxY) {
+          res.push(matrix[y][x]);
+          y++;
+        }
+        return;
+      }
+      // right
+      while(x < maxX) {
+        res.push(matrix[y][x]);
+        x++;
+      }
+      // down
+      while(y < maxY) {
+        res.push(matrix[y][x]);
+        y++;
+      }
+      // left
+      while(x > minX) {
+        res.push(matrix[y][x]);
+        x--;
+      }
+      // up
+      while(y > minY) {
+        res.push(matrix[y][x]);
+        y--;
+      }
+      cutBorder(maxY - 1, maxX - 1);
+    };
+    cutBorder(lenY - 1, lenX - 1);
+    return res;
+  };
+  var f = spiralOrder;
+</script>
+</body>
+</html>

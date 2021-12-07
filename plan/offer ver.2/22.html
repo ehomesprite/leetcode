@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val) {
+   *     this.val = val;
+   *     this.next = null;
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   * @param {number} k
+   * @return {ListNode}
+   */
+  var getKthFromEnd = function(head, k) {
+    let ahead = head;
+    let p = head;
+    let step = k - 1;
+    while(step > 0) {
+      ahead = ahead?.next;
+      step--;
+    }
+    while(ahead.next) {
+      ahead = ahead.next;
+      p = p.next;
+    }
+    return p;
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n - a positive integer
+   * @return {number}
+   */
+  var hammingWeight = function(n) {
+    let weight = 0;
+    const binStr = n.toString(2);
+    [].forEach.call(binStr, ((char) => {
+      if (char === '1') weight += 1;
+    }));
+    return weight;
+  };
+</script>
+</body>
+</html>
