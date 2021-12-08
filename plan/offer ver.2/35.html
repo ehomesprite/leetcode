@@ -20,7 +20,20 @@
    * @return {Node}
    */
   var copyRandomList = function(head) {
-
+    let p = head;
+    const nodeList = [];
+    while(p) {
+      nodeList.push(p);
+      p = p.next;
+    }
+    if (!nodeList.length) return null;
+    const copyNodeList = nodeList.map((node) => new Node(node.val));
+    copyNodeList.forEach((node, index) => { node.next = copyNodeList[index + 1] || null; });
+    for (let i = 0; i < nodeList.length; i++) {
+      const n = nodeList.indexOf(nodeList[i].random);
+      copyNodeList[i].random = n >= 0 ? copyNodeList[n] : null;
+    }
+    return copyNodeList[0];
   };
 </script>
 </body>

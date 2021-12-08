@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * // Definition for a Node.
+   * function Node(val,left,right) {
+   *    this.val = val;
+   *    this.left = left;
+   *    this.right = right;
+   * };
+   */
+  /**
+   * @param {Node} root
+   * @return {Node}
+   */
+  var treeToDoublyList = function(root) {
+    const stack = [];
+    let p = root;
+    const find = (node) => {
+      if (!node) return;
+      let i = 0;
+      for (; i < stack.length; i++) {
+        if (node.val < stack[i].val) {
+          stack.splice(i, 0, node);
+          break;
+        }
+      }
+      if (i === stack.length) stack.push(node);
+      find(node.left);
+      find(node.right);
+    };
+    find(root);
+    stack.forEach((node, index) => {
+      node.right = (index === (stack.length - 1)) ? stack[0] : stack[index + 1];
+      node.left = index === 0 ? stack[stack.length - 1] : stack[index - 1];
+    });
+    return stack[0];
+  };
+</script>
+</body>
+</html>

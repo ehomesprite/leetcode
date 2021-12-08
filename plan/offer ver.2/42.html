@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var maxSubArray = function(nums) {
+    let max = nums[0];
+    let sum = 0;
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[i] + sum <= 0) {
+        sum = 0;
+        max = Math.max(max, nums[i]);
+      } else {
+        sum += nums[i];
+        max = Math.max(max, sum);
+      }
+    }
+    return max;
+  };
+  var f = maxSubArray;
+</script>
+</body>
+</html>
