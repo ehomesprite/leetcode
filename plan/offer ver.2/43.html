@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @return {number}
+   */
+  var countDigitOne = function(n) {
+    const strN = n.toString();
+    let count = 0;
+    for (let i = 0; i < strN.length; i++) {
+      const digit = 10 ** (strN.length - i - 1);
+      const high = Number(strN.substring(0, i));
+      const low = Number(strN.substring(i + 1));
+      if (strN[i] === '0') {
+        count += high * digit;
+      } else if (strN[i] === '1') {
+        count += high * digit + low + 1;
+      } else {
+        count += (high + 1) * digit;
+      }
+    }
+    return count;
+  };
+</script>
+</body>
+</html>

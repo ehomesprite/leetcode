@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @return {character}
+   */
+  var f = firstUniqChar = function(s) {
+    const res = [];
+    const multi = {};
+    for (let i = 0; i < s.length ; i++) {
+      const char = s[i];
+      const x = res.indexOf(char);
+      if (x === -1) res.push(char);
+      else multi[char] = 1;
+    }
+    for (let n of res) {
+      if (!multi[n]) return n;
+    }
+    return ' ';
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @return {string[]}
+   */
+  var permutation = function(s) {
+    const strSet = new Set();
+    const len = s.length;
+    const map = new Array(len);
+    const find = (str = '') => {
+      if (str.length === len) strSet.add(str);
+      for (let i = 0; i < len;i++) {
+        if (map[i]) continue;
+        map[i] = 1;
+        find(str + s[i]);
+        map[i] = 0;
+      }
+    };
+    find();
+    return [...strSet];
+  };
+  var f = permutation;
+</script>
+</body>
+</html>

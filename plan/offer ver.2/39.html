@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var majorityElement = function(nums) {
+    const map = [];
+    const len = nums.length;
+    for (let i = 0; i < len; i++) {
+      const n = nums[i];
+      map[n] = (map[n] ?? 0) + 1;
+      if (map[n] > len / 2) return n;
+    }
+    return -1;
+  };
+</script>
+</body>
+</html>
