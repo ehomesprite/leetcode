@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 123456789 - 347652891
+
+  // var validateStackSequences = function(pushed, popped) {
+  //   if (!popped.length && !pushed.length) return true;
+  //   const arr = [];
+  //   for (let i = 0; i < pushed.length; i++) {
+  //     const n = pushed[i];
+  //     const target = popped[0];
+  //     if (n === target) {
+  //       popped.shift();
+  //       while(arr.length && arr[arr.length - 1] === popped[0]) {
+  //         popped.shift();
+  //         arr.pop();
+  //       }
+  //       if (!popped.length && !arr.length && i === pushed.length - 1) return true;
+  //     } else {
+  //       arr.push(n);
+  //     }
+  //   }
+  //   return false;
+  // };
+  const validateStackSequences = (pushed, popped) => {
+    const indexList = popped.map((n) => {
+      const i = pushed.indexOf(n);
+      return i;
+    });
+
+    for (let i = 0; i < indexList.length; i++) {
+
+    }
+    return true;
+  };
+  var f = validateStackSequences;
+</script>
+</body>
+</html>

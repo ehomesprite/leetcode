@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+
+  /**
+   * Encodes a tree to a single string.
+   *
+   * @param {TreeNode} root
+   * @return {string}
+   */
+  var serialize = function(root) {
+    if (root === null) return [];
+    const data = [root.val];
+    const list = [root];
+    while(list.length){
+      let step = list.length;
+      while(step > 0) {
+        const node = list.shift();
+        if (node) {
+          list.push(node.left);
+          list.push(node.right);
+          data.push(node.left?.val ?? null);
+          data.push(node.right?.val ?? null);
+        }
+        step--;
+      }
+    }
+    return data;
+  };
+
+  /**
+   * Decodes your encoded data to tree.
+   *
+   * @param {string} data
+   * @return {TreeNode}
+   */
+  var deserialize = function(data) {
+    if (!data.length) return null;
+    const head = new TreeNode(data[0])
+    const list = [head];
+    let i = 1;
+    while(i < data.length) {
+      const node = list.shift();
+      if (node) {
+        node.left = data[i] === null ? null : new TreeNode(data[i]);
+        node.right = data[i + 1] === null ? null : new TreeNode(data[i + 1]);
+        list.push(node.left, node.right);
+        i = i + 2;
+      }
+    }
+    return head;
+  };
+
+  /**
+   * Your functions will be called as such:
+   * deserialize(serialize(root));
+   */
+</script>
+</body>
+</html>
