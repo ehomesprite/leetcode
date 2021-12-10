@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var f = reversePairs = function(nums) {
+    let count = 0;
+    const caculate = (arr1, arr2) => {
+      const newArr = [];
+      while(arr1.length && arr2.length) {
+        if (arr2[0] < arr1[0]) {
+          count += arr1.length;
+          newArr.push(arr2.shift());
+        } else {
+          newArr.push(arr1.shift());
+        }
+      }
+      if (arr1.length) newArr.push(...arr1);
+      else if (arr2.length) newArr.push(...arr2);
+      return newArr;
+    };
+    const find = (arr) => {
+      if (arr.length === 0) return arr;
+      if (arr.length === 1) return arr;
+      if (arr.length === 2) return caculate(arr.slice(0, 1), arr.slice(1));
+      const m = Math.floor(arr.length / 2);
+      const [lArr, rArr] = [find(arr.slice(0, m + 1)), find(arr.slice(m + 1))];
+      return caculate(lArr, rArr);
+    };
+    find(nums.slice());
+    return count;
+  };
+  // [4, 2, 3, 1] = 5
+  /**
+   *  42   31 + 2
+   *  24~13  4231 -
+   *  1 +2
+   *  123 +1
+   */
+</script>
+</body>
+</html>

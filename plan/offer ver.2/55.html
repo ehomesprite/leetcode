@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {number}
+   */
+  var maxDepth = function(root) {
+    let maxDepth = 0;
+    const find = (node, depth) => {
+      if (!node) {
+        if (depth - 1 > maxDepth) maxDepth = depth - 1;
+        return;
+      }
+      find(node.left, depth + 1);
+      find(node.right, depth + 1);
+    };
+    find(root, 1);
+    return maxDepth;
+  };
+</script>
+</body>
+</html>
