@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
+<script>
+  /**
+   * @param {number[]} nums1
+   * @param {number[]} nums2
+   * @return {number}
+   */
+  var f = findMedianSortedArrays = function(nums1, nums2) {
+    const arr = [];
+    const [len1, len2] = [nums1.length, nums2.length];
+    const len = len1 + len2;
+    const isOdd = len % 2 === 0;
+    const n = Math.floor(len / 2) + 1;
+    while(1) {
+      if (!nums2.length || nums1[0] <= nums2[0]) {
+        arr.push(nums1.shift());
+      } else {
+        arr.push(nums2.shift());
+      }
+      if (arr.length === n) {
+        if (isOdd) return (arr[n - 1] + arr[n - 2]) / 2;
+        else return arr[n - 1];
+      }
+    }
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+https://leetcode-cn.com/problems/add-two-numbers/
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  /**
+   * @param {ListNode} l1
+   * @param {ListNode} l2
+   * @return {ListNode}
+   */
+  var addTwoNumbers = function(l1, l2) {
+    const calc = (n1, n2) => {
+      const [v1, v2] = [n1?.val || 0, n2?.val || 0];
+      let val = v1 + v2;
+      let extra = 0;
+      if (val >= 10) {
+        extra = 1;
+        val = val - 10;
+      }
+      const node = new ListNode(val);
+      return [node, extra];
+    };
+    let [p1, p2, head, last] = [l1, l2, null, null];
+    while(p1 || p2) {
+      let [node, extra] = calc(p1, p2);
+      if (!head) head = node;
+      else last.next = node;
+      last = node;
+
+      p1 = p1?.next;
+      p2 = p2?.next;
+      if (extra) {
+        if (!p1) p1 = new ListNode(0);
+        p1.val += 1;
+      }
+    }
+    return head;
+  };
+</script>
+</body>
+</html>
