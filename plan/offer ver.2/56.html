@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+  var f1 = singleNumbers = function(nums) {
+    const ans = [];
+    nums.sort((a, b) => a - b);
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[i] !== nums[i + 1]) {
+        ans.push(nums[i]);
+        if (ans.length === 2) return ans;
+      }
+      while(nums[i] === nums[i + 1]) i++;
+    }
+  };
+</script>
+</body>
+</html>

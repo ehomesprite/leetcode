@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  const findSum = ({ nums, target, numCount = 1, route = [] }) => {
+    if (numCount === 1) {
+      if (nums.includes(target)) return [...route, target];
+      return null;
+    }
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[i] >= target) break;
+      route.push(nums[i]);
+      const res = findSum({
+        nums: nums.slice(i + 1),
+        target: target - nums[i],
+        numCount: numCount - 1,
+        route,
+      })
+      if (res) return res;
+      route.pop();
+    }
+    return null;
+  }
+
+  /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number[]}
+   */
+  var twoSum = function(nums, target) {
+    let [l, r] = [0, nums.length - 1];
+    while(l < r) {
+      const sum = nums[l] + nums[r];
+      if (sum === target) return [nums[l], nums[r]];
+      if (sum > target) r--;
+      else l++;
+    }
+    return [];
+  };
+</script>
+</body>
+</html>
