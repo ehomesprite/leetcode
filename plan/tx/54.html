@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} matrix
+   * @return {number[]}
+   */
+  var f = spiralOrder = function(matrix) {
+    const [lenY, lenX] = [matrix.length, matrix[0].length];
+    const ans = [];
+    const find = (sY, sX, maxY, maxX) => {
+      if (sY > maxY || sX > maxX) return;
+      let [y, x] = [sY, sX];
+      while(x <= maxX) {
+        ans.push(matrix[y][x++]);
+      }
+      x = maxX;
+      y = sY + 1;
+      while(y <= maxY) {
+        ans.push(matrix[y++][x]);
+      }
+      if (maxY > sY) {
+        y = maxY;
+        x = maxX - 1;
+        while(x >= sX) {
+          ans.push(matrix[y][x--]);
+        }
+      }
+      if (maxX > sX) {
+        x = sX;
+        y = maxY - 1;
+        while(y >= sY + 1) {
+          ans.push(matrix[y--][x]);
+        }
+      }
+      find(sY + 1, sX + 1, maxY - 1, maxX - 1);
+    };
+    find(0, 0, lenY - 1, lenX - 1);
+    return ans;
+  };
+</script>
+</body>
+</html>
