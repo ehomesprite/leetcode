@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number}
+   */
+  var search = function(nums, target) {
+    let step = nums.length
+    let i = 0;
+    while (step) {
+      if (nums[i] === target) return i;
+      if (nums[i] < target) {
+        i = (i + 1 + nums.length) % nums.length;
+        if (nums[i] > target) return -1;
+      } else {
+        i = (i - 1 + nums.length) % nums.length;
+        if (nums[i] < target) return -1;
+      }
+      step--;
+    }
+    return -1;
+  };
+</script>
+</body>
+</html>

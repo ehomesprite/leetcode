@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+https://leetcode-cn.com/problems/multiply-strings/
+<script>
+  const strAdd = (s1, s2) => {
+    let res = '';
+    let extra = 0;
+    let [i1, i2] = [s1.length - 1, s2.length - 1];
+    while(i1 >= 0 || i2 >= 0) {
+      const v1 = +(s1?.[i1] ?? 0);
+      const v2 = +(s2?.[i2] ?? 0);
+      let val = v1 + v2 + extra;
+      extra = 0;
+      if (val >= 10) {
+        val = val - 10;
+        extra = 1;
+      }
+      res = val.toString() + res;
+      i1--;
+      i2--;
+    }
+    if (extra) res = '1' + res;
+    if (res[0] === '0') {
+      let zeroI = 0;
+      while(res[zeroI] === '0' && res[zeroI + 1] === '0') zeroI++;
+      res = res.substr(zeroI);
+    }
+    return res;
+  };
+  /**
+   * @param {string} num1
+   * @param {string} num2
+   * @return {string}
+   */
+  var multiply = function(num1, num2) {
+    const len2 = num2.length;
+    if (len2 > 1) {
+      return strAdd(multiply(num1, num2[len2 - 1]),
+        (multiply(num1, num2.substring(0, len2 - 1)) + '0'));
+    }
+    const len1 = num1.length;
+    if (len1 > 1) {
+      return strAdd(multiply(num1[len1 - 1], num2),
+        (multiply(num1.substring(0, len1 - 1), num2) + '0'));
+    }
+    return (+num1 * +num2).toString();
+  };
+</script>
+</body>
+</html>

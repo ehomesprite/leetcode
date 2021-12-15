@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} x
+   * @return {number}
+   */
+  var reverse = function(x) {
+    let strX = x.toString();
+    let negative = false;
+    if (strX[0] === '-') {
+      negative = true;
+      strX = strX.substr(1);
+    }
+    let newStr = '';
+    for (let i = 0; i < strX.length; i++) {
+      const char = strX[i];
+      newStr = char + newStr;
+    }
+    if (negative) newStr = '-' + newStr;
+    const num = Number(newStr);
+    if (num > 2**31 - 1 || num < -1 * 2 ** 31) return 0;
+    return num;
+  };
+</script>
+</body>
+</html>

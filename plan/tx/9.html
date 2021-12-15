@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} x
+   * @return {boolean}
+   */
+  var f = isPalindrome = function(x) {
+    const strX = x.toString();
+    let [l, r] = [0, strX.length - 1];
+    while(l <= r) {
+      if (strX[l] !== strX[r]) return false;
+      l += 1;
+      r -= 1;
+    }
+    return true;
+  };
+</script>
+</body>
+</html>

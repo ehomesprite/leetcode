@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+https://leetcode-cn.com/problems/merge-k-sorted-lists/
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  /**
+   * @param {ListNode[]} lists
+   * @return {ListNode}
+   */
+  var mergeKLists = function(lists) {
+    const head = new ListNode('h');
+    let p = head;
+    const pList = lists.slice();
+    while(1) {
+      let min = pList[0]?.val ?? Infinity;
+      let minIndex = 0;
+      for (let i = 1; i < pList.length; i++) {
+        const node = pList[i];
+        const nodeVal = node?.val ?? Infinity;
+        if (nodeVal < min) {
+          min = nodeVal;
+          minIndex = i;
+        }
+      }
+      if (min === Infinity) break;
+      p.next = pList[minIndex];
+      p = p.next;
+      pList[minIndex] = pList[minIndex].next;
+    }
+    return head.next;
+  };
+</script>
+</body>
+</html>

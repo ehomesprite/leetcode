@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+https://leetcode-cn.com/problems/valid-parentheses/
+<script>
+  const map = {
+    '(': 1,
+    '{': 2,
+    '[': 3,
+    ')': -1,
+    '}': -2,
+    ']': -3,
+  };
+  /**
+   * @param {string} s
+   * @return {boolean}
+   */
+  var f = isValid = function (s) {
+    const stack = [];
+    for (let i = 0; i < s.length; i++) {
+      const char = s[i];
+      const val = map[char];
+      if (val > 0) {
+        stack.push(val);
+      } else {
+        if (!stack.length) return false;
+        if (stack.pop() + val !== 0) return false;
+      }
+    }
+    return !stack.length;
+  };
+</script>
+</body>
+</html>

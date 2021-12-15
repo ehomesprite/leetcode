@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var twoSum = (nums, target) => {
+    let ans = [];
+    let [l, r] = [0, nums.length - 1];
+    while(l < r) {
+      const sum = nums[l] + nums[r];
+      if (sum === target) ans.push([nums[l], nums[r]]);
+      else if (sum < target) l++;
+      else r--;
+    }
+    return ans;
+  };
+  /**
+   * @param {number[]} nums
+   * @return {number[][]}
+   */
+  var f = threeSum = function(nums) {
+    nums.sort((a, b) => a - b);
+    const ans = [];
+    for (let i = 0; i < nums.length - 2; i++) {
+      while (nums[i] === nums[i - 1]) i++;
+      const v1 = nums[i];
+      let [l, r] = [i + 1, nums.length - 1]
+      while(l < r) {
+        const [v2, v3] = [nums[l], nums[r]];
+        const sum = v1 + v2 + v3;
+        if (sum === 0) ans.push([v1, v2, v3]);
+        if (sum <= 0) {
+          do {
+            l++;
+          } while(l < nums.length && nums[l] === nums[l - 1]);
+        }
+        if (sum >= 0) {
+          do {
+            r--;
+          } while(r >= 0 && nums[r] === nums[r + 1]);
+        }
+      }
+    }
+    return ans;
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number}
+   */
+  var f = threeSumClosest = function(nums, target) {
+    let min = Infinity;
+    let res;
+    nums.sort((a, b) => a - b);
+    for (let i = 0; i < nums.length - 2; i++) {
+      while (nums[i] === nums[i - 1]) i++;
+      const v1 = nums[i];
+      let [l, r] = [i + 1, nums.length - 1]
+      while(l < r) {
+        const [v2, v3] = [nums[l], nums[r]];
+        const sum = v1 + v2 + v3;
+        if (sum === target) return target;
+        const diff = Math.abs(target - sum);
+        if (diff < min) {
+          min = diff;
+          res = sum;
+        }
+        if (sum < target) l++;
+        if (sum > target) r--;
+      }
+    }
+    return res;
+  };
+</script>
+</body>
+</html>
