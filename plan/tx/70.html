@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @return {number}
+   */
+  var f = climbStairs = function(n) {
+    const cache = [0, 1, 2];
+    if (cache[n]) return cache[n];
+    let i = 3;
+    while (i <= n) {
+      cache[i] = cache[i - 1] + cache[i - 2];
+      i++;
+    }
+    return cache[n];
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   * @param {number} k
+   * @return {ListNode}
+   */
+  var f = rotateRight = function(head, k) {
+    const list = [];
+    let p = head;
+    while(p) {
+      list.push(p);
+      p = p.next;
+    }
+    const len = list.length;
+    if (!len) return null;
+    list[len - 1].next = list[0];
+    k = k % len;
+    const newHead = list[(len - k) % len];
+    list[(2 * len - k - 1) % len].next = null;
+    return newHead;
+  };
+</script>
+</body>
+</html>

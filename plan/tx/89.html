@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @return {number[]}
+   */
+  var f = grayCode = function(n) {
+    const start = ''.padStart(n, '0');
+    let ans = null;
+    const stack = [start];
+    const map = [[], ['0', '1']];
+    const find = (n) => {
+      const last = map[n - 1];
+      map[n] = [...last.map(s => s + '0'), ...last.map(s => s + '1').reverse()];
+    }
+    let i = 2;
+    while (i <= n) find(i++);
+    return map[n].map(n => parseInt(n, 2));
+  };
+</script>
+</body>
+</html>
