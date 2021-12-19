@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val) {
+   *     this.val = val;
+   *     this.next = null;
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   * @return {boolean}
+   */
+  var isPalindrome = function(head) {
+    const list = [];
+    let p = head;
+    while(p) {
+      list.push(p);
+      p = p.next;
+    }
+    const len = list.length;
+    const m = Math.floor((len - 1) / 2);
+    let l, r;
+    if (len % 2 === 0) {
+      l = m;
+      r = l + 1;
+    } else {
+      l = m - 1;
+      r = m + 1;
+    }
+    while(l >= 0 && r < len) {
+      if (list[l].val !== list[r].val) return false;
+      l--;
+      r++;
+    }
+    return true;
+  };
+</script>
+</body>
+</html>

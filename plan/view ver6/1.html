@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} astr
+   * @return {boolean}
+   */
+  var isUnique = function(astr) {
+    const map = {};
+    for (let i = 0; i < astr.length; i++) {
+      const char = astr[i];
+      if (map[char]) return false;
+      map[char] = 1;
+    }
+    return true;
+  };
+</script>
+</body>
+</html>

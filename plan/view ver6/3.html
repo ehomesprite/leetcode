@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} S
+   * @param {number} length
+   * @return {string}
+   */
+  var f = replaceSpaces = function(S, length) {
+    let str = S.slice(0, length);
+    str = str.replace(/\s/g, '%20');
+    return str;
+  };
+</script>
+</body>
+</html>

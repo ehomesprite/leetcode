@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val) {
+   *     this.val = val;
+   *     this.next = null;
+   * }
+   */
+
+  /**
+   * @param {ListNode} headA
+   * @param {ListNode} headB
+   * @return {ListNode}
+   */
+  var getIntersectionNode = function(headA, headB) {
+    const listA = [];
+    const listB = [];
+    let p = headA;
+    while(p) {
+      listA.unshift(p);
+      p = p.next;
+    }
+    p = headB;
+    while(p) {
+      listB.unshift(p);
+      p = p.next;
+    }
+
+    let i = 0;
+    const len = Math.min(listA.length, listB.length);
+    if (listA[0] !== listB[0]) return null;
+    while(i < len) {
+      if (listA[i] !== listB[i]) return listA[i - 1];
+      i++;
+    }
+    return listA[i - 1];
+  };
+</script>
+</body>
+</html>

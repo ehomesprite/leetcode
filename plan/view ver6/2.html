@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+https://leetcode-cn.com/problems/check-permutation-lcci/
+<script>
+  /**
+   * @param {string} s1
+   * @param {string} s2
+   * @return {boolean}
+   */
+  var f = CheckPermutation = function(s1, s2) {
+   let diff = 0;
+    const map = {};
+    if (s1.length !== s2.length) return false;
+    for (let i = 0; i < s1.length; i++) {
+      const char = s1[i];
+      map[char] = (map[char] ?? 0) + 1;
+      diff++;
+    }
+
+    for (let i = 0; i < s2.length; i++) {
+      const char = s2[i];
+      if (map[char] > 0) {
+        map[char] -= 1;
+        diff--;
+      } else {
+        return false;
+      }
+    }
+
+    return diff === 0;
+  };
+</script>
+</body>
+</html>
