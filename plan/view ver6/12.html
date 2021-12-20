@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Initialize your data structure here.
+   */
+  var MyQueue = function() {
+    this._source = [];
+    this._queue = [];
+  };
+
+  /**
+   * Push element x to the back of queue.
+   * @param {number} x
+   * @return {void}
+   */
+  MyQueue.prototype.push = function(x) {
+    this._source.push(x);
+    this._queue = this._source.slice(0).reverse();
+  };
+
+  /**
+   * Removes the element from in front of queue and returns that element.
+   * @return {number}
+   */
+  MyQueue.prototype.pop = function() {
+    const n = this._queue.pop();
+    this._source = this._queue.slice().reverse();
+    return n;
+  };
+
+  /**
+   * Get the front element.
+   * @return {number}
+   */
+  MyQueue.prototype.peek = function() {
+    return this._source[0];
+  };
+
+  /**
+   * Returns whether the queue is empty.
+   * @return {boolean}
+   */
+  MyQueue.prototype.empty = function() {
+    return this._source.length === 0;
+  };
+
+  /**
+   * Your MyQueue object will be instantiated and called as such:
+   * var obj = new MyQueue()
+   * obj.push(x)
+   * var param_2 = obj.pop()
+   * var param_3 = obj.peek()
+   * var param_4 = obj.empty()
+   */
+</script>
+</body>
+</html>

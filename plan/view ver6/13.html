@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @param {number[][]} graph
+   * @param {number} start
+   * @param {number} target
+   * @return {boolean}
+   */
+  var f = findWhetherExistsPath = function(n, graph, start, target) {
+    const routes = new Array(n).fill(0).map((x) => new Set());
+    graph.forEach(([from, to]) => {
+      routes[from].add(to);
+    });
+    for (let to of routes[start]) {
+      if (to === target) return true;
+      for (let end of routes[to]) {
+        if (end === target) return true;
+        routes[start].add(end);
+      }
+    }
+    return false;
+  };
+</script>
+</body>
+</html>
