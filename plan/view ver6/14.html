@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} stackSize
+   */
+  var TripleInOne = function(stackSize) {
+    this.source = new Array(3).fill(0).map(() => []);
+    this.max = stackSize;
+  };
+
+  /**
+   * @param {number} stackNum
+   * @param {number} value
+   * @return {void}
+   */
+  TripleInOne.prototype.push = function(stackNum, value) {
+    const stack = this.source[stackNum];
+    if (!stack || stack.length === this.max) return;
+    stack?.push?.(value);
+  };
+
+  /**
+   * @param {number} stackNum
+   * @return {number}
+   */
+  TripleInOne.prototype.pop = function(stackNum) {
+    const stack = this.source[stackNum];
+    if (!stack || !stack.length) return -1;
+    return stack.pop();
+  };
+
+  /**
+   * @param {number} stackNum
+   * @return {number}
+   */
+  TripleInOne.prototype.peek = function(stackNum) {
+    const stack = this.source[stackNum];
+    if (!stack || !stack.length) return -1;
+    return stack[stack.length - 1];
+  };
+
+  /**
+   * @param {number} stackNum
+   * @return {boolean}
+   */
+  TripleInOne.prototype.isEmpty = function(stackNum) {
+    const stack = this.source[stackNum];
+    return (!stack || !stack.length);
+  };
+
+  /**
+   * Your TripleInOne object will be instantiated and called as such:
+   * var obj = new TripleInOne(stackSize)
+   * obj.push(stackNum,value)
+   * var param_2 = obj.pop(stackNum)
+   * var param_3 = obj.peek(stackNum)
+   * var param_4 = obj.isEmpty(stackNum)
+   */
+
+  var o = new TripleInOne(1);
+</script>
+</body>
+</html>
