@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var SortedStack = function() {
+    this._source = [];
+  };
+
+  /**
+   * @param {number} val
+   * @return {void}
+   */
+  SortedStack.prototype.push = function(val) {
+    const len = this._source.length;
+    for (let i = 0; i < len; i++) {
+      const n = this._source[i];
+      if (val < n) {
+        this._source.splice(i, 0, val);
+        return;
+      }
+    }
+    this._source.push(val);
+  };
+
+  /**
+   * @return {void}
+   */
+  SortedStack.prototype.pop = function() {
+    this._source.shift();
+  };
+
+  /**
+   * @return {number}
+   */
+  SortedStack.prototype.peek = function() {
+    return this._source[0] ?? -1;
+  };
+
+  /**
+   * @return {boolean}
+   */
+  SortedStack.prototype.isEmpty = function() {
+    return this._source.length === 0;
+  };
+
+  /**
+   * Your SortedStack object will be instantiated and called as such:
+   * var obj = new SortedStack()
+   * obj.push(val)
+   * obj.pop()
+   * var param_3 = obj.peek()
+   * var param_4 = obj.isEmpty()
+   */
+
+  var a = new SortedStack();
+</script>
+</body>
+</html>
