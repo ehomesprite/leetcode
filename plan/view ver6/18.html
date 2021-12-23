@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {boolean}
+   */
+  var isBalanced = function(root) {
+    const find = (node, depth = 0) => {
+      if (!node) return null;l
+      find(node.left, depth + 1);
+      find(node.right, depth + 1);
+
+      return node.depth;
+    };
+  };
+</script>
+</body>
+</html>

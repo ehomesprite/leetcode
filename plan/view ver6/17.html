@@ -27,8 +27,20 @@
   var listOfDepth = function(tree) {
     const list = [];
     const find = (node, layer = 0) => {
-
+      if (!node) return;
+      const listNode = new ListNode(node.val);
+      if (!list[layer]) {
+        list[layer] = listNode;
+        list[layer].final = listNode;
+      }
+      else {
+        list[layer].final.next = listNode;
+        list[layer].final = listNode;
+      }
+      find(node.left, layer + 1);
+      find(node.right, layer + 1);
     };
+    find(tree, 0);
 
     return list;
   };
