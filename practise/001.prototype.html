@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function createInstance (constructor, ...arg) {
+    let instance = Object.create(null);
+    instance = constructor.call(instance, ...arg) || instance;
+    Reflect.setPrototypeOf(instance, constructor.prototype);
+    return instance;
+  }
+  function A (a) {
+    this.a = a;
+    this.b = 2;
+  }
+  A.prototype.logA = function () {
+    console.log(this.a);
+  }
+  var a1 = createInstance(A, 'x');
+  var a2 = new A(1);
+</script>
+</body>
+</html>
