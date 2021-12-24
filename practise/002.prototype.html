@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  Function.prototype.$bind = function (context, ...presetArgs) {
+    if (!context) context = window;
+    const func = this;
+    const boundFunc = function (...args) {
+      return func.call((this instanceof func) ? this : context, ...presetArgs, ...args);
+    }
+    boundFunc.prototype = func.prototype;
+    return boundFunc;
+  }
+  // var str = '12345';
+  // var forEach = Array.prototype.forEach.$bind(str);
+  // forEach((char) => {
+  //   console.log(char);
+  // });
+  // var o = { a: 'a' };
+  // function A (x, y) {
+  //   this.x = x;
+  //   this.y = y;
+  // }
+  // AA = A.$bind(o, 1);
+  // aa = new AA(2);
+</script>
+</body>
+</html>
