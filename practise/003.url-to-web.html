@@ -24,7 +24,74 @@
 
   DNS负载均衡
 
+  发起TCP链接
+  3次握手
+  -> seq=x syn=1
+  <- seq=y syn=1 ack=x+1
+  -> ack=y+1 seq=z
+  4次挥手
+  -> fin=1 ack=z seq=x
+  <- ack=x+1 seq=z
+  <- fin=1 ack=x seq=y
+  -> ack=y seq=x
 
+  HTTP
+  常用get,post,options | put,head,delete
+
+  get/post diff
+  get会被缓存，post不会
+  get只能url编码
+  get参数会完整保留在历史记录
+  post更安全
+  get长度有限制，post协议本身没有限制
+
+  get一次tcp包，header和data一起， post大部分浏览器会分开发 （ff就一次）
+
+  http cache
+  rule
+  强制缓存
+  先看本地，没有再发请求
+  协议缓存
+  拿缓存标识找服务器，有效则304，然后从本地拿
+
+  方案
+  强制缓存
+  expires/Cache-Control
+  expires为过期时间点，会因为时间产生误差，现用的较少
+
+  cache-control：
+  private: 客户端可以缓存
+  public：客户端和代理服务器都可以缓存
+  max-age: 收到之后多少s后失效
+  no-cache: 走协商
+  no-store: 不缓存
+
+  协商缓存
+  Last-Modified：
+  if-Modified-Since 304/200
+  Etag If-None-Match  Etag用的少，费资源
+
+  刷新
+  写url，全流程
+  f5, 不走强制缓存
+  control+f5, 清理缓存，然后发请求
+
+  服务器处理返回http
+  状态码
+  1xx 继续 2xx 成功 3xx 重定向 4xx 客户端错误 5xx 服务端错误
+  200 成功
+  204 no content
+  301 302
+  400 bad request
+  401 no auth
+  403 forbidden
+  404 not found
+
+  渲染页面
+  HTML -> DOM tree
+  CSS -> CSSOM tree
+  -> render tree
+  js>css>layout>paint>composite
 </p>
 </body>
 </html>
