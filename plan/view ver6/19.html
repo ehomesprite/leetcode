@@ -17,17 +17,13 @@
    * @param {TreeNode} root
    * @return {boolean}
    */
-  var isBalanced = function(root) {
-    const find = (node, depth = 0) => {
-      if (!node) return depth;
-      const l = find(node.left, depth + 1);
-      const r = find(node.right, depth + 1);
-      if (l < 0 || r < 0 || Math.abs(r - l) >= 2) return -1;
-      return Math.max(l, r);
+  var isValidBST = function(root) {
+    const find = ({ node, min = -Infinity, max = Infinity }) => {
+      if (!node) return true;
+      if (node.val >= max || node.val <= min) return false;
+      return find({ node: node.left, max: node.val, min }) && find({ node: node.right, min: node.val, max });
     };
-    const depth = find(root);
-    if (depth < 0) return false;
-    return true;
+    return find({ node: root });
   };
 </script>
 </body>
