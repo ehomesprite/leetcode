@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const maxPubStr = (strList) => {
+    let pubstr = '';
+    let i = 0;
+    while(1) {
+      const char = strList[0][i];
+      for (let j = 1; j < strList.length; j++) {
+        const str = strList[j];
+        if (i >= str.length || str[i] !== char) return pubstr;
+      }
+      pubstr += char;
+      i++;
+    }
+    return pubstr;
+  };
+</script>
+</body>
+</html>

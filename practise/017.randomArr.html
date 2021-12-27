@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const f = (source, len) => {
+    const res = [];
+    source = source.slice();
+    let n = 1;
+    while(n <= len && source.length) {
+      const i = Math.floor(Math.random() * source.length);
+      res.push(source[i]);
+      source.splice(i, 1);
+      n++;
+    }
+    return res;
+  };
+</script>
+</body>
+</html>
