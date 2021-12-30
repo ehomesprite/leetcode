@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+class MyPromise {
+  /**
+   *
+   * @param init <(resolve: function, reject: function) => void>
+   */
+  constructor(init) {
+    this.status = 'pending';
+    this.result = null;
+    this.errReason = null;
+    this.onSuccess = [];
+    this.onFailed = [];
+    init(this.resolve.bind(this), this.reject.bind(this));
+  }
+
+  resolve(res) {
+    if (this.status !== 'pending') return;
+    this.result = res;
+    this.status = 'resolved';
+    this.runSuccess();
+  }
+
+  reject(reason) {
+    if (this.status !== 'pending') return;
+    this.errReason = reason;
+    this.status = 'rejected';
+    this.runFailed();
+  }
+
+  then(onSuccess, onFailed) {
+    return new MyPromise((resolve) => {
+      const successCallback = (...arg) => {
+        resolve(onSuccess(...arg));
+      };
+      this.onSuccess.push(successCallback);
+      this.onFailed.push(onFailed);
+      if (this.status === 'resolved') this.runSuccess();
+      else if (this.status === 'rejected') this.runFailed();
+    });
+  }
+
+  runSuccess() {
+    this.onSuccess.forEach((cb) => {
+      queueMicrotask(() => { cb(this.result) });
+    })
+    this.onSuccess = [];
+  }
+
+  runFailed() {
+    this.onFailed.forEach((cb) => {
+      queueMicrotask(() => { cb(this.errReason) });
+    });
+    this.onFailed = [];
+  }
+}
+</script>
+</body>
+</html>
