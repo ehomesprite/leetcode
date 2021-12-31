@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const charList = [
+    { unit: 'M', val: 1000 },
+    { unit: 'D', val: 500 },
+    { unit: 'C', val: 100 },
+    { unit: 'L', val: 50 },
+    { unit: 'X', val: 10 },
+    { unit: 'V', val: 5 },
+    { unit: 'I', val: 1 },
+  ];
+  /**
+   * @param {number} num
+   * @return {string}
+   */
+  var f = intToRoman = function(num) {
+    const arr = [];
+    let i = 0;
+    while(i < charList.length) {
+      arr[i] = Math.floor(num / charList[i].val);
+      num = num % charList[i].val;
+      i++;
+    }
+    let res = '';
+    i = 0;
+    while(i < arr.length) {
+      const count = arr[i];
+      const unit = charList[i].unit;
+      if (!count) { i++; continue; }
+      if (i !== 0 && i % 2 === 1 && count === 1 && arr[i + 1] === 4) {
+        res += charList[i + 1].unit + charList[i - 1].unit;
+        i += 2;
+      } else if (i !== 0 && i % 2 === 0 && count === 4) {
+        res += charList[i].unit + charList[i - 1].unit;
+        i++;
+      } else {
+        let n = count;
+        while(n) {
+          res += unit;
+          n--;
+        }
+        i++;
+      }
+    }
+    return res;
+  };
+</script>
+1994
+
+1M 1D 4C 1L 4X 0V 4I
+
+M CM XC IV
+</body>
+</html>

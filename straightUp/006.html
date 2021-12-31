@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @param {number} numRows
+   * @return {string}
+   */
+  var f = convert = function(s, numRows) {
+    if (!numRows) return '';
+    if (numRows === 1) return s;
+    const arr = new Array(numRows).fill('');
+    let i = 0;
+    while(i < s.length) {
+      const step = (i % (2 * (numRows - 1)));
+      const line = numRows - Math.abs(step - (numRows - 1)) - 1;
+      const char = s.charAt(i);
+      arr[line] += char;
+      i++;
+    }
+    return arr.reduce((prev = '', curr) => prev + curr);
+  };
+</script>
+3
+0 - 5
+
+0 4
+13
+2
+</body>
+</html>

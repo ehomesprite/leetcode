@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} num
+   * @return {number}
+   */
+  var exchangeBits = function(num) {
+    const arr = num.toString(2).split('');
+    if (arr.length % 2 !== 0) arr.unshift('0');
+    for (let i = 0; i < arr.length; i += 2) {
+      [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+    }
+    return parseInt(arr.join(''), 2);
+  };
+</script>
+</body>
+</html>
