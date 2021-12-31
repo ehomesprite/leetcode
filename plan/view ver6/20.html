@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /** LDR
+   * @param {TreeNode} root
+   * @param {TreeNode} p
+   * @return {TreeNode}
+   */
+  var inorderSuccessor = function(root, p) {
+    let target = null;
+    let needNext = false
+    const check = (node) => {
+      if (!node || target) return;
+      if (node === p) needNext = true;
+      else if (needNext) target = node;
+    };
+    const find = (node) => {
+      if (!node || target) return;
+      if (node.left) find(node.left);
+      check(node);
+      if (node.right) find(node.right);
+    };
+    find(root);
+
+    return target;
+  };
+</script>
+</body>
+</html>
