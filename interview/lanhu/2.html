@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // new Promise((r,j))
+
+  class MyPromise {
+    constructor(init) {
+      this.status = 'pending'; // pending|rejected|resolved
+      this.result = null;
+      this.errReason = null;
+      this.resolve = (res) => {
+        if (this.status !== 'pending') return;
+        this.result = res;
+        this.status = 'resolved';
+        this.onSuccess?.(this.result);
+      };
+      this.reject = (reason) => {
+        if (this.status !== 'pending') return;
+        this.status = 'rejected';
+        this.errReason = reason;
+        this.onFailed?.(this.errReason);
+      };
+      init(this.resolve, this.reject);
+    }
+
+    then(onSuccess, onFailed) {
+      this.onSuccess = onSuccess;
+      this.onFailed = onFailed;
+      if (this.status === 'resolved') {
+        this.onSuccess?.(this.result);
+      } else if (this.status === 'rejected') {
+        this.onFailed?.(this.errReason);
+      }
+    }
+  }
+
+
+</script>
+</body>
+</html>

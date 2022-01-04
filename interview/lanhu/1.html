@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * arr [2,3,5,7]
+   * num 7
+   */
+  var fn = (arr, num) => {
+    const res = [];
+    const find = (list, target, ans = [], start = 0) => {
+      for (let i = start; i < list.length; i++) {
+        const val = list[i];
+        if (val > target) continue;
+        if (val === target) {
+          res.push([...ans, val]);
+        } else {
+          ans.push(val);
+          find(list, target - val, ans, i);
+          ans.pop();
+        }
+      }
+    };
+    find(arr, num, []);
+    return res;
+  }
+</script>
+</body>
+</html>
