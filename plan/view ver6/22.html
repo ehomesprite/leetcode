@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} N
+   * @param {number} M
+   * @param {number} i
+   * @param {number} j
+   * @return {number}
+   */
+  var insertBits = function(N, M, i, j) {
+    const len = j - i + 1;
+    const strN = N.toString(2).padStart(j + 1, '0');
+    const nLen = strN.length;
+    const strM = M.toString(2).padStart(len, '0');
+    // const arr = strN.split('');
+    // for (let x = nLen - j - 1, n = 0; x <= nLen - i - 1; x++, n++) {
+    //   arr[x] = strM[n];
+    // }
+    // const str = arr.join('');
+    const str = strN.substring(0, nLen - j - 1) + strM.substr(strM.length - len, len) + strN.substring(nLen - i);
+    console.log(strN, strM, str);
+    return parseInt(str, 2);
+  };
+</script>
+</body>
+</html>

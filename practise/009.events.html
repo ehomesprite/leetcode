@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+class MyEvent {
+  constructor() {
+    this._map = {};
+  }
+
+  on(eventName, callback) {
+    if (!callback) throw Error('need callback');
+    if (!this._map[eventName]) this._map[eventName] = [];
+    if (!this._map[eventName].includes(callback)) this._map[eventName].push(callback);
+  }
+
+  emit(eventName, ...args) {
+    if (!this._map[eventName]) return;
+    this._map[eventName].forEach((callback) => {
+      callback(...args);
+      if (callback._once) this.off(eventName, callback);
+    })
+  }
+
+  off(eventName, callback) {
+    if (!this._map[eventName]) return;
+    if (!callback) this._map[eventName] = [];
+    else if (this._map[eventName].includes(callback)) {
+      this._map[eventName] = this._map[eventName].filter((cb) => {
+        return cb !== callback;
+      });
+    }
+  }
+
+  once(eventName, callback) {
+    if (!callback) throw Error('need callback');
+    if (!this._map[eventName]) this._map[eventName] = [];
+    if (!this._map[eventName].includes(callback)) {
+      callback._once = true;
+      this._map[eventName].push(callback);
+    }
+  }
+}
+</script>
+</body>
+</html>

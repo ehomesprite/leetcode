@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const f = (nums) => {
+    for (let i = 0; i < nums.length; i++) {
+      while (
+        nums[i] >= 1 &&
+        nums[i] <= nums.length && // 对1~nums.length范围内的元素进行安排
+        nums[nums[i] - 1] !== nums[i] // 已经出现在理想位置的，就不用交换
+        ) {
+        const temp = nums[nums[i] - 1]; // 交换
+        nums[nums[i] - 1] = nums[i];
+        nums[i] = temp;
+      }
+    }
+    return nums;
+  };
+</script>
+</body>
+</html>

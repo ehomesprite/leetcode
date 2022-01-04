@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} A
+   * @param {number} B
+   * @return {number}
+   */
+  var f = convertInteger = function(A, B) {
+    let num = (A ^ B);
+    let count = 0;
+    while (num) {
+      if (num & 1) count++;
+      num = num >>> 1;
+    }
+    return count;
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const intervalMap = [];
+  let intervalId = 1;
+  var $setInterval = (cb, duration) => {
+    let timer;
+    const step = () => {
+      timer = setTimeout(() => {
+        cb();
+        return step();
+      }, duration);
+    };
+    step();
+    const id = intervalId++;
+    intervalMap[id] = () => {
+      clearTimeout(timer);
+    };
+    return id;
+  };
+  var $clearInterval = (id) => {
+    intervalMap?.[id]?.();
+  };
+</script>
+</body>
+</html>

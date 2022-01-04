@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @param {TreeNode} p
+   * @param {TreeNode} q
+   * @return {TreeNode}
+   */
+  var lowestCommonAncestor = function(root, p, q) {
+    let a1, a2;
+    const findAncestor = (node, target, data = { ancestor: [], done: false }) => {
+      if (!node || data._done) return;
+      data.ancestor.unshift(node);
+      if (node === target) { data._done = true; return data.ancestor; }
+      findAncestor(node.left, target, data);
+      findAncestor(node.right, target, data);
+      if (data._done) return data.ancestor;
+      data.ancestor.shift();
+    };
+    a1 = findAncestor(root, p);
+    a2 = findAncestor(root, q);
+    console.log(a1, a2);
+    for (let val of a1) {
+      if (a2.indexOf(val) >= 0) return val;
+    }
+    return null;
+  };
+</script>
+</body>
+</html>

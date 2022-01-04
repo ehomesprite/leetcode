@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const testVnode = {
+    tag: 'div',
+    attrs:{
+      id:'app'
+    },
+    children: [
+      {
+        tag: 'span',
+        children: [
+          { tag: 'A', children: [] }
+        ]
+      },
+      {
+        tag: 'SPAN',
+        children: [
+          { tag: 'A', children: [] },
+          { tag: 'A', children: [] }
+        ]
+      }
+    ]
+  }
+  var createElement = (vnode) => {
+    // 字符串类型直接就是文本节点
+    if (typeof vnode === "string" || typeof vnode === "number") {
+      return document.createTextNode(String(vnode));
+    }
+    const dom = document.createElement(vnode.tag.toLowerCase().trim());
+    for (let attrName in vnode.attrs) {
+      dom.setAttribute(attrName, vnode.attrs[attrName]);
+    }
+    vnode.children.forEach((child) => {
+      const childDom = createElement(child);
+      dom.appendChild(childDom);
+    });
+    return dom;
+  };
+</script>
+</body>
+</html>

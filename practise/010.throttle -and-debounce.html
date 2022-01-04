@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function throttle (func, duration) {
+    let lock = false;
+    return function (...arg) {
+      if (lock) return;
+      setTimeout(() => {
+        lock = false;
+      }, duration);
+      lock = true;
+      return func(...arg);
+    }
+  }
+
+  function debounce (func, duration) {
+    let timer;
+    return function (...arg) {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...arg);
+      }, duration);
+    }
+  }
+
+  var t = (...arg) => { console.log(arg); }
+</script>
+</body>
+</html>
