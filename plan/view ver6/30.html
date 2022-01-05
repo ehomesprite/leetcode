@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} matrix
+   * @return {void} Do not return anything, modify matrix in-place instead.
+   */
+  var setZeroes = function(matrix) {
+    const yList = new Set();
+    const xList = new Set();
+    for (let y in matrix) {
+      for (let x in matrix[y]) {
+        if (matrix[y][x] === 0) {
+          yList.add(y);
+          xList.add(x);
+        }
+      }
+    }
+    for (let y in matrix) {
+      for (let x in matrix[y]) {
+        if (yList.has(y) || xList.has(x)) {
+          matrix[y][x] = 0;
+        }
+      }
+    }
+  };
+</script>
+</body>
+</html>

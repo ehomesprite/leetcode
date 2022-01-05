@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} cap
+   */
+  var StackOfPlates = function(cap) {
+    this.cap = cap;
+    this.currStack = null;
+    this.stacks = [];
+  };
+
+  /**
+   * @param {number} val
+   * @return {void}
+   */
+  StackOfPlates.prototype.push = function(val) {
+    if (this.cap < 1) return;
+    if (this.currStack && this.currStack.length < this.cap) {
+      this.currStack.push(val);
+    } else {
+      this.currStack = [val];
+      this.stacks.push(this.currStack);
+    }
+  };
+
+  /**
+   * @return {number}
+   */
+  StackOfPlates.prototype.pop = function() {
+    if (!this.currStack) return -1;
+    const item = this.currStack.pop();
+    if (this.currStack.length === 0) {
+      this.stacks.pop();
+      this.currStack = this.stacks[this.stacks.length - 1] || null;
+    }
+    return item;
+  };
+
+  /**
+   * @param {number} index
+   * @return {number}
+   */
+  StackOfPlates.prototype.popAt = function(index) {
+    if (index === this.stacks.length - 1) return this.pop();
+    if (!this.stacks[index]) return -1;
+    const item = this.stacks[index].pop();
+    if (this.stacks[index].length === 0) {
+      this.stacks.splice(index, 1);
+    }
+    return item;
+  };
+
+  /**
+   * Your StackOfPlates object will be instantiated and called as such:
+   * var obj = new StackOfPlates(cap)
+   * obj.push(val)
+   * var param_2 = obj.pop()
+   * var param_3 = obj.popAt(index)
+   */
+
+  var s = new StackOfPlates(3)
+</script>
+</body>
+</html>

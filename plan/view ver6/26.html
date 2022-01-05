@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @return {boolean}
+   */
+  var f = canPermutePalindrome = function(s) {
+    const stack = new Set();
+    for (let char of s) {
+      if (stack.has(char)) stack.delete(char);
+      else stack.add(char);
+    }
+    return stack.size <= 1;
+  };
+</script>
+</body>
+</html>
