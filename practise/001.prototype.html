@@ -7,9 +7,9 @@
 <body>
 <script>
   function createInstance (constructor, ...arg) {
-    let instance = Object.create(null);
-    instance = constructor.call(instance, ...arg) || instance;
-    Reflect.setPrototypeOf(instance, constructor.prototype);
+    let instance = Object.create(constructor.prototype);
+    const res = constructor.call(instance, ...arg);
+    if (res && (typeof res === 'object' || typeof res === 'function')) return res;
     return instance;
   }
   function A (a) {

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} length
+   * @param {number} w
+   * @param {number} x1
+   * @param {number} x2
+   * @param {number} y
+   * @return {number[]}
+   */
+  var f = drawLine = function(length, w, x1, x2, y) {
+    const list = new Array(length);
+    const h = Math.ceil(length * 32 / w);
+    if (y > h - 1 || x1 >= w || x2 >= w) return list.fill(0);
+    const line = w / 32;
+    let x = 0;
+    let index = y * line;
+    while(x < w) {
+      let str = '';
+      for (let i = 0; i < 32; i++) {
+        if (x >= x1 && x <= x2) {
+          str += '1';
+        } else {
+          str += '0';
+        }
+        x++;
+      }
+      let res = parseInt(str, 2)
+      if (str[0] === '1') res = ~(res - 1) * -1;
+      list[index] = res;
+      index += 1;
+    }
+    for (let i = 0; i < list.length; i++) {
+      if (!list[i]) list[i] = 0;
+    }
+    return list;
+  };
+</script>
+</body>
+</html>

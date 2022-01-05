@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} matrix
+   * @return {void} Do not return anything, modify matrix in-place instead.
+   */
+  var rotate = function(matrix) {
+    const exchangeSquare = (x1, y1, x2, y2, x3, y3, x4, y4) => {
+      const m = matrix;
+      [m[y1][x1], m[y2][x2], m[y3][x3], m[y4][x4]] = [m[y4][x4], m[y1][x1], m[y2][x2], m[y3][x3]];
+    };
+    const exchangeBorder = (xMin, xMax, yMin, yMax) => {
+      if (xMin === xMax) return;
+      const max = xMax - xMin;
+      let move = 0;
+      while(move < max) {
+        exchangeSquare(xMin + move, yMin, xMax, yMin + move, xMax - move, yMax, xMin, yMax - move);
+        move++;
+      }
+    };
+    const len = matrix.length;
+    let move = 0;
+    const mid = Math.floor((len - 1) / 2);
+    while(move <= mid) {
+      exchangeBorder(move, len - 1 - move, move, len - 1 - move);
+      move++;
+    }
+    console.log(matrix);
+  };
+</script>
+</body>
+</html>
