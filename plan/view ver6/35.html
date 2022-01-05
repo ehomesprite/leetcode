@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} A
+   * @param {number} B
+   * @return {number}
+   */
+  var f = multiply = function(A, B) {
+    if (!A || !B) return 0;
+    let result = 0;
+    while(B > 0) {
+      result += A;
+      B--;
+    }
+    return result;
+  };
+</script>
+</body>
+</html>
