@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {void} Do not return anything, modify nums in-place instead.
+   */
+  var f = nextPermutation = function(nums) {
+    const list = nums;
+    const len = list.length;
+    for (let i = len - 2; i >= 0; i--) {
+      let curr = list[i];
+      if (curr >= list[i + 1]) continue;
+      let minI;
+      for (let x = len - 1; x > i; x--) {
+        if (list[x] > curr) {
+          minI = x;
+          break;
+        }
+      }
+      if (minI) {
+        list[i] = list[minI];
+        list[minI] = curr;
+        let [l, r] = [i + 1, len - 1];
+        while(l < r) {
+          [list[l], list[r]] = [list[r], list[l]];
+          l += 1;
+          r -= 1;
+        }
+        return;
+      }
+    }
+    nums.reverse();
+  };
+</script>
+1243
+
+1324
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  /**
+   * @param {ListNode[]} lists
+   * @return {ListNode}
+   */
+  var mergeKLists = function(lists) {
+    lists = lists.filter(list => list);
+    let head = p = { next: null };
+    while(1) {
+      let node = null;
+      let index = null;
+      for (let i = 0; i < lists.length; i++) {
+        if (!lists[i]) continue;
+        const val = lists[i].val;
+        if (!node || val < node.val) {
+          node = lists[i];
+          index = i;
+        }
+      }
+      if (!node) break;
+      lists[index] = lists[index].next;
+      if (!lists[index]) lists.splice(index, 1);
+      p.next = node;
+      p = node;
+    }
+    return head.next;
+  };
+</script>
+</body>
+</html>

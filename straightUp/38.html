@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @return {string}
+   */
+  var f = countAndSay = function(n) {
+    const cache = ['', '1'];
+    const find = (x) => {
+      if (cache[x]) return cache[x];
+      let str = cache[x - 1];
+      let last;
+      let count = 0;
+      let newStr = '';
+      for (let char of str) {
+        if (char !== last) {
+          if (count) newStr += count + last;
+          count = 1;
+          last = char;
+        } else {
+          count += 1;
+        }
+      }
+      if (count) newStr += count + last;
+      cache[x] = newStr;
+    };
+    let step = 1;
+    while(step <= n) find(step++);
+    return cache[n];
+  };
+</script>
+</body>
+</html>

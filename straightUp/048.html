@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} matrix
+   * @return {void} Do not return anything, modify matrix in-place instead.
+   */
+  var f = rotate = function(matrix) {
+    const len = matrix.length;
+    const swapCorner = (pointList) => {
+      let valList = [];
+      pointList.forEach((p, i) => {
+        if (i === 3) valList.unshift(matrix[p[0]][p[1]]);
+        else valList.push(matrix[p[0]][p[1]]);
+      });
+      pointList.forEach((p) => {
+        matrix[p[0]][p[1]] = valList.shift();
+      });
+    };
+    const swapSquare = (depth = 0) => {
+      const [min, max] = [depth, len - 1 - depth];
+      const pointList = [[min, min], [min, max], [max, max], [max, min]];
+      let maxStep = max - min - 1;
+      let step = 0;
+      while(step <= maxStep) {
+        const stepList = [[0, step], [step, 0], [0, -1 * step], [-1 * step, 0]];
+        swapCorner(pointList.map((p, i) => [p[0] + stepList[i][0], p[1] + stepList[i][1]]));
+        step++;
+      }
+    };
+    let maxDepth = Math.floor(len / 2);
+    let depth = 0;
+    while(depth < maxDepth) swapSquare(depth++);
+  };
+  var m = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]];
+</script>
+</body>
+</html>

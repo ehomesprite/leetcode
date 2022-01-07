@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const strSign = (str) => {
+    const list = str.split('');
+    list.sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0));
+    return list.join('');
+  };
+  /**
+   * @param {string[]} strs
+   * @return {string[][]}
+   */
+  var f = groupAnagrams = function(strs) {
+    const strMap = {};
+    for (let str of strs) {
+      const sign = strSign(str);
+      if (!strMap[sign]) strMap[sign] = [str];
+      else strMap[sign].push(str);
+    }
+    const res = [];
+    for (let key in strMap) res.push(strMap[key]);
+    return res;
+  };
+</script>
+</body>
+</html>
