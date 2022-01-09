@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  class Calculator {
+    constructor() {
+      this.d = `${this.a} ${this.operator} ${this.b} =`
+      this.display = '';
+      this.a = ''; // (a operator b)
+      this.b = '';
+      this.operator = ''; // idle | '+' | '-' | '*' | '/'
+      this.saveFlag = false;
+    }
+
+    keyDown(char) {
+      if (char >= '0' && char <= '9') {
+        this.inputNum(char);
+      } else if (['+', '-', '*', '/'].includes(char)) {
+        this.inputOperator(char);
+      } else if (char === '=') {
+        this.inputEqua();
+      }
+    }
+
+    inputNum(char) {
+      if (this.clearFlag) this.clear();
+      if (this.saveFlag) {
+        this.display = char;
+      } else {
+        this.display += char;
+      }
+      if (this.operator) {
+        this.b = this.display;
+      } else {
+        this.a = this.display;
+      }
+    }
+
+    clear() {
+      this.operator = '';
+      this.saveFlag = false;
+      this.a = this.b = this.display = '';
+    }
+
+    delNum() {
+      this.display = this.display.substring(0, this.display.length);
+    }
+
+    inputOperator(operator) {
+      this.operator = operator;
+      this.saveFlag = true;
+    }
+
+    inputEqua() {
+      let result;
+      const [a, b] = [Number(this.a), Number(this.b)];
+      if (this.operator === '+') result = a + b;
+      if (this.operator === '-') result = a - b;
+      if (this.operator === '*') result = a * b;
+      if (this.operator === '/') result = a / b;
+      this.display = result;
+      this.a = result;
+      this.clearFlag = true;
+    }
+  }
+</script>
+</body>
+</html>
