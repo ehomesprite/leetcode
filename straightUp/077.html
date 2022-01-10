@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @param {number} k
+   * @return {number[][]}
+   */
+  var f = combine = function(n, k) {
+    const res = [];
+    const find = (start, group = []) => {
+      if (group.length === k) {
+        res.push(group.slice());
+        return;
+      }
+      for (let num = start; num <= n; num++) {
+        group.push(num);
+        find(num + 1, group);
+        group.pop();
+      }
+    };
+    find(1, []);
+    return res;
+  };
+</script>
+</body>
+</html>

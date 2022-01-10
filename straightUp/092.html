@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   * @param {number} left
+   * @param {number} right
+   * @return {ListNode}
+   */
+  var f = reverseBetween = function(head, left, right) {
+    if (left === right) return head;
+    let hair = new ListNode(0);
+    hair.next = head;
+    let p = head;
+    let prev = hair;
+    let i = 1;
+    let start, last;
+    while(p) {
+      if (i >= left && i < right) {
+        if (i === left) {
+          last = p;
+          start = prev;
+        }
+        let next = p.next;
+        p.next = prev;
+        prev = p;
+        p = next;
+      } else if (i === right || !p.next) {
+        let end = p.next;
+        p.next = prev;
+        last.next = end;
+        start.next = p;
+        break;
+      } else {
+        prev = p;
+        p = p.next;
+      }
+      i += 1;
+    }
+    return hair.next;
+  };
+</script>
+</body>
+</html>
