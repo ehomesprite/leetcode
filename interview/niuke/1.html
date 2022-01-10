@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  class EventBus {
+    constructor() {
+      this.listenerMap = {};
+    }
+
+    on(eventName, callback) {
+      if (!this.listenerMap[eventName]) this.listenerMap[eventName] = [];
+      this.listenerMap[eventName].push(callback);
+    }
+
+    emit(eventName, ...args) {
+      if (!this.listenerMap[eventName]) return;
+      this.listenerMap[eventName].forEach((cb) => {
+        cb(...args);
+      });
+    }
+
+    off(eventName, callback) {
+      // clearAll
+      if (!eventName) this.listenerMap = {};
+      // clear name all
+      if (!callback) this.listenerMap[eventName] = [];
+      // clear cb
+      this.listenerMap[eventName] = this.listenerMap[eventName].filter((cb) => cb !== callback);
+    }
+
+    once(eventName, callback) {
+      let onceCb = (...arg) => {
+        const res = callback(...arg);
+        this.off(eventName, onceCb);
+      };
+      this.on(eventName, onceCb);
+    }
+  }
+
+  const o = new EventBus();
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @return {string[]}
+   */
+  var f = generateParenthesis = function(n) {
+    const ans = [];
+    const find = (str, open = 0, closed = 0) => {
+      if (str.length === n * 2) {
+        ans.push(str);
+        return;
+      }
+      if (open < n) find(str + '(', open + 1, closed);
+      if (closed < open) find(str + ')', open, closed + 1);
+    };
+    find('', 0, 0);
+    return ans;
+  };
+</script>
+</body>
+</html>

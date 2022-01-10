@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  const swap = (start, end) => {
+    const _s = start;
+    let prev = null;
+    while(prev !== end) {
+      const next = start.next;
+      start.next = prev;
+      prev = start;
+      start = next;
+    }
+    return [end, _s];
+  };
+  /**
+   * @param {ListNode} head
+   * @return {ListNode}
+   */
+  var swapPairs = function(head) {
+    let hair = prev = { next: head };
+    let p = head;
+    while(p) {
+      if (p.next) {
+        let next = p.next.next;
+        const [start, end] = swap(p, p.next);
+        end.next = next;
+        prev.next = start;
+        prev = end;
+        p = next;
+      } else {
+        break;
+      }
+    }
+    return hair.next;
+  };
+</script>
+</body>
+</html>

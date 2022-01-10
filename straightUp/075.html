@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {void} Do not return anything, modify nums in-place instead.
+   */
+  var f = sortColors = function(nums) {
+    const map = new Array(3).fill(0).map(() => []);
+    for (let i = 0; i < nums.length; i++) {
+      let val = nums[i];
+      map[val].push(i);
+      for (let l = val + 1; l <= 2; l++) {
+        if (!map[l].length) continue;
+        const n = map[l].shift();
+        const m = map[val].pop();
+        [nums[n], nums[m]] = [nums[m], nums[n]];
+        map[l].push(m);
+        map[val].push(n);
+        val = nums[i];
+
+      }
+    }
+    console.log(nums);
+  };
+</script>
+</body>
+</html>
