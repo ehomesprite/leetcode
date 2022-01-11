@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val, left, right) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.left = (left===undefined ? null : left)
+   *     this.right = (right===undefined ? null : right)
+   * }
+   */
+  /**
+   * @param {number} n
+   * @return {TreeNode[]}
+   */
+  var generateTrees = function(n) {
+    const find = (start, end) => {
+      if (start > end) return [null];
+      const nodeList = [];
+      for (let i = start; i <= end; i++) {
+        const leftList = find(start, i - 1);
+        const rightList = find(i + 1, end);
+        for (let left of leftList) {
+          for (let right of rightList) {
+            const node = new ListNode(i);
+            node.left = left;
+            node.right = right;
+            nodeList.push(node);
+          }
+        }
+      }
+      return nodeList;
+    };
+    return find(1, n);
+  };
+</script>
+</body>
+</html>

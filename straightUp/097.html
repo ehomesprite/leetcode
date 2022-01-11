@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s1
+   * @param {string} s2
+   * @param {string} s3
+   * @return {boolean}
+   */
+  var f = isInterleave = function(s1, s2, s3) {
+    const cache = {};
+    const find = (s1, s2, s3) => {
+      if (s3 === '') return s1 === '' && s2 === '' ;
+      if (cache[s1 + ',' + s2]) return false;
+      const char = s3[0];
+      if (s1[0] !== char && s2[0] !== char) return false;
+      if (s1[0] === char) {
+        const isInter = find(s1.slice(1), s2, s3.slice(1));
+        if (isInter) return true;
+      }
+      if (s2[0] === char) {
+        const isInter = find(s1, s2.slice(1), s3.slice(1));
+        if (isInter) return true;
+      }
+      cache[s1 + ',' + s2] = 1;
+      return false;
+    };
+    return find(s1, s2, s3);
+  };
+</script>
+</body>
+</html>

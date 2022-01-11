@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @return {string[]}
+   */
+  var f = restoreIpAddresses = function(s) {
+    const res = [];
+    const find = (i, ip = []) => {
+      if (ip.length === 4 && i === s.length) {
+        res.push(ip.join('.'));
+        return;
+      }
+      const char = s[i];
+      // change
+      if (ip.length) {
+        const val = Number(`${ip[ip.length - 1] + char}`);
+        if (ip[ip.length - 1] !== '0' && val <= 255) {
+          const old = ip[ip.length - 1];
+          ip[ip.length - 1] = String(val);
+          find(i + 1, ip);
+          ip[ip.length - 1] = old;
+        }
+      }
+
+      // add
+      if (ip.length < 4) {
+        ip.push(char);
+        find(i + 1, ip);
+        ip.pop();
+      }
+    };
+    find(0, []);
+    return res;
+  };
+</script>
+</body>
+</html>

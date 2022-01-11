@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number} n
+   * @return {number}
+   */
+  var numTrees = function(n) {
+    const cache = new Array(n + 1).fill(0).map(() => []);
+    const find = (start, end) => {
+      if (start >= end) return 1;
+      if (cache[start][end]) return cache[start][end];
+      let count = 0;
+      for (let i = start; i <= end; i++) {
+        const left = find(start, i - 1);
+        const right = find(i + 1, end);
+        count += left * right;
+      }
+      cache[start][end] = count;
+      return count;
+    };
+    return find(1, n);
+  };
+</script>
+</body>
+</html>
