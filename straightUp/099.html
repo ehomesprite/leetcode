@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val, left, right) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.left = (left===undefined ? null : left)
+   *     this.right = (right===undefined ? null : right)
+   * }
+   */
+  function TreeNode(val, left, right) {
+    this.val = (val === undefined ? 0 : val)
+    this.left = (left === undefined ? null : left)
+    this.right = (right === undefined ? null : right)
+  }
+
+  // const a = new TreeNode(3, new TreeNode(1), new TreeNode(4, new TreeNode(2)));
+  const a = new TreeNode(1, new TreeNode(3,null, new TreeNode(2)));
+
+  /**
+   * @param {TreeNode} root
+   * @return {void} Do not return anything, modify root in-place instead.
+   */
+  var f = recoverTree = function (root) {
+    let errorNode = null;
+    let errorNext = null;
+    let done = false;
+    let prev = null;
+    const swapNode = (node1, node2) => {
+      [node1.val, node2.val] = [node2.val, node1.val];
+    };
+    const find = (node) => {
+      if (done) return null;
+      if (node.left) find(node.left);
+      if (prev) {
+        if (node.val < prev.val) {
+          if (!errorNode) {
+            errorNode = prev;
+            errorNext = node;
+          } else {
+            swapNode(errorNode, node);
+            done = true;
+          }
+        }
+      }
+      prev = node;
+      if (node.right) find(node.right);
+    };
+    find(root);
+    if (!done) swapNode(errorNode, errorNext);
+  };
+</script>
+</body>
+</html>
