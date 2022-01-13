@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {TreeNode} root
+   * @return {number[][]}
+   */
+  var zigzagLevelOrder = function(root) {
+    if (!root) return [];
+    let reverse = false;
+    const res = [];
+    const nodeList = [root];
+    while(nodeList.length) {
+      let ans = nodeList.map(n => n.val);
+      if (reverse) ans.reverse();
+      res.push(ans);
+      let step = nodeList.length;
+      while(step-- > 0) {
+        const node = nodeList.shift();
+        if (node.left) nodeList.push(node.left);
+        if (node.right) nodeList.push(node.right);
+      }
+      reverse = !reverse;
+    }
+    return res;
+  };
+</script>
+</body>
+</html>
