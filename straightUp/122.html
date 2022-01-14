@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} prices
+   * @return {number}
+   */
+  var f = maxProfit = function(prices) {
+    let profit = 0;
+    let cost = null;
+    for (let i = 0; i < prices.length; i++) {
+      if (prices[i] < prices[i + 1] && (i === 0 || prices[i] <= prices[i - 1])) {
+        cost = prices[i];
+      } else if ((i === prices.length - 1 || prices[i] >= prices[i + 1]) && (prices[i] > prices[i - 1])) {
+        if (cost !== null) profit += prices[i] - cost;
+        cost = null;
+      }
+    }
+    return profit;
+  };
+</script>
+</body>
+</html>

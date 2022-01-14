@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[][]} triangle
+   * @return {number}
+   */
+  var minimumTotal1 = function(triangle) {
+    let min = Infinity;
+    const h = triangle.length;
+    const find = (y, x, sum) => {
+      if (triangle[y]?.[x] === undefined) return;
+      sum += triangle[y][x];
+      if (y === h - 1) {
+        min = Math.min(min, sum);
+        return;
+      }
+      find(y + 1, x, sum);
+      find(y + 1, x + 1, sum);
+    };
+    find(0, 0, 0);
+    return min;
+  };
+
+  var f = minimumTotal = function(triangle) {
+    const h = triangle.length;
+    let min = Infinity;
+    const dp = new Array(h).fill(0).map(() => []);
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < triangle[y].length; x++) {
+        if (y === 0) {
+          dp[y][x] = triangle[y][x];
+        } else {
+          dp[y][x] = Math.min(dp[y - 1][x] ?? Infinity, dp[y - 1][x - 1] ?? Infinity) + triangle[y][x];
+        }
+        if (y === h - 1) min = Math.min(min, dp[y][x]);
+      }
+    }
+    return min;
+  }
+</script>
+</body>
+</html>
