@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @return {string[][]}
+   */
+  var f = partition = function(s) {
+    const isStrPal = (str) => {
+      let [l, r] = [0, str.length - 1];
+      while(l < r) {
+        if (str[l++] !== str[r--]) return false;
+      }
+      return true;
+    };
+    const mergeRes = (res1, res2) => {
+      if (!res2.length) return [[res1]];
+      return res2.map((res) => {
+        return [res1, ...res];
+      });
+    };
+    const find = (str) => {
+      if (str.length === 1) return [[str]];
+      let res = [];
+      for (let i = 0; i < str.length; i++) {
+        const subStr = str.substring(0, i + 1);
+        if (!isStrPal(subStr)) continue;
+        const resList = mergeRes(subStr, find(str.substring(i + 1)));
+        res.push(...resList);
+      }
+      return res;
+    };
+    return find(s);
+  };
+</script>
+</body>
+</html>

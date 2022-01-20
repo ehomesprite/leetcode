@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var f = singleNumber = function(nums) {
+    const setOnce = new Set();
+    const setMulti = new Set();
+    for (let num of nums) {
+      if (setMulti.has(num)) continue;
+      if (setOnce.has(num)) {
+        setOnce.delete(num);
+        setMulti.add(num);
+      } else {
+        setOnce.add(num);
+      }
+    }
+    return [...setOnce][0];
+  };
+</script>
+</body>
+</html>

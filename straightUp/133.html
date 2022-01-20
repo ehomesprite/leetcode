@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * // Definition for a Node.
+   * function Node(val, neighbors) {
+   *    this.val = val === undefined ? 0 : val;
+   *    this.neighbors = neighbors === undefined ? [] : neighbors;
+   * };
+   */
+
+  /**
+   * @param {Node} node
+   * @return {Node}
+   */
+  var cloneGraph = function(node) {
+    const cache = [];
+    const cloneNode = (node) => {
+      if (!node) return null;
+      if (cache[node.val]) return cache[node.val];
+      const newNode = new Node(node.val);
+      cache[node.val] = newNode;
+      newNode.neighbors = node.neighbors.map((sebNode) => {
+        return cloneNode(sebNode);
+      });
+      return newNode;
+    };
+    return cloneNode(node);
+  };
+</script>
+</body>
+</html>

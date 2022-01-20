@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function f (...arg) {
+    const list = arg || [];
+    let sum = 0;
+    function _f (...nextArgs) {
+      list.push(...nextArgs);
+    }
+    _f.valueOf = () => {
+      if (list.length) {
+        sum += list.reduce((prev, curr) => {
+           return prev + curr;
+        });
+        list.length = 0;
+      }
+      return sum;
+    }
+    return _f;
+  }
+</script>
+</body>
+</html>
