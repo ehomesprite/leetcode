@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   * @return {ListNode}
+   */
+  var insertionSortList = function(head) {
+    const hair = new ListNode();
+    const sort = (node) => {
+      let h = hair;
+      if (!h.next) {
+        h.next = node;
+        node.next = null;
+        return;
+      }
+      while(h.next) {
+        if (node.val < h.next.val) {
+          [h.next, node.next] = [node, h.next];
+          return;
+        }
+        h = h.next;
+      }
+      h.next = node;
+      node.next = null;
+    };
+    let p = head;
+    while(p) {
+      let next = p.next;
+      sort(p);
+      p = next;
+    }
+    return hair.next;
+  };
+</script>
+</body>
+</html>
