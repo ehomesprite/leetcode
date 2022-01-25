@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const operators = new Set(['+', '/', '*', '-'])
+  /**
+   * @param {string[]} tokens
+   * @return {number}
+   */
+  var f = evalRPN = function(tokens) {
+    const list = [];
+    tokens.forEach((token) => {
+      if (operators.has(token)) {
+        const n2 = list.pop();
+        const n1 = list.pop();
+        let val = eval(`${n1} ${token} ${n2}`);
+        if (val >= 0) val = Math.floor(val);
+        else val = Math.ceil(val);
+        list.push(val);
+      } else {
+        list.push(+token);
+      }
+    });
+    return list[0];
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function A() {
+    this.a = 1;
+  }
+
+  function B(...arg) {
+    A.call(this, ...arg);
+    this.b = 2;
+  }
+
+  B.prototype = Object.create(A.prototype);
+
+
+  const map = {
+    '(': ')',
+    '[': ']',
+    '{': '}',
+  }
+
+  const check = (str) => {
+    const stash = [];
+    for (let char of str) {
+      if (map[char]) {
+        stash.push(map[char]);
+      } else {
+        if (stash[stash.length - 1] === char) stash.pop();
+        else return false;
+      }
+    }
+    return true;
+  }
+</script>
+</body>
+</html>
