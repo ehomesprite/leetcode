@@ -40,6 +40,23 @@ const find = (matrix, target) => {
   return f(0, matrix.length - 1);
 };
 
+const find2 = (list, target) => {
+  let [l, r] = [0, list.length - 1];
+  while(l <= r) {
+    if (l < r) {
+      if (list[l] > target || list[r] < target) return -1;
+      if (list[l] === target) return l;
+      if (list[r] === target) return r;
+      const m = Math.floor((r + l) / 2);
+      if (list[m] > target) r = m + 1;
+      else if (list[m] < target) l = m;
+      else return m;
+    } else if (l === r) {
+      return list[r] === target ? r : -1;
+    }
+  }
+}
+
 const check = (matrix, target, expect) => {
   const has = find(matrix, target);
   return expect === has;
