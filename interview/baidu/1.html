@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+0.1 0.2
+'0.2' '0.1'
+0.002
+0.100
+
+'0.3'
+0.003 /
+<script>
+  const add = (n1, n2) => {
+    let [s1, s2] = [String(n1), String(n2)];
+    const maxLen = Math.max(s1.length, s2.length);
+    s1 = s1.padEnd(maxLen, '0');
+    s2 = s2.padEnd(maxLen, '0');
+    let s3 = '';
+    let carry = 0;
+    for (let i = maxLen - 1; i >= 0; i--) {
+      const [char1, char2] = [s1[i], s2[i]];
+      let val = Number(char1) + Number(char2) + carry;
+      carry = 0;
+      if (val >= 10) {
+        val -= 10;
+        carry = 1;
+      }
+      s3 = String(val) + s3;
+    }
+    if (carry) s3 = '1.' + s3;
+    return s3;
+  };
+
+  class EventLite {
+    constructor() {
+      this.listenerMap = {};
+    }
+
+    on(eventName, cb) {
+      if (!this.listenerMap[eventName]) this.listenerMap = [];
+      this.listenerMap[eventName].push(cb);
+      return () => this.off(eventName, cb);
+    }
+
+    emit(eventName, ...arg) {
+      if (!this.listenerMap[eventName]) return;
+      this.listenerMap[eventName].forEach((cb) => {
+        cb(...arg);
+      });
+    }
+
+    off(eventName, cb) {
+      if (!eventName) { // clearAll
+        this.listenerMap = {};
+      } else if (eventName)
+    }
+  }
+
+</script>
+</body>
+</html>

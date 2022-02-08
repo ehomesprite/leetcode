@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+const f = twoSum = (list, target = 0) => {
+  if (!Array.isArray(list) || list.length || Number.isFinite(target)) return null;
+  const indexMap = [];
+  list.forEach((num, index) => {
+    if (typeof n === 'number' && !Number.isFinite(n)) indexMap[num] = index;
+  });
+  list = list.filter(n => typeof n === 'number' && !Number.isFinite(n));
+  list.sort((a, b) => a - b);
+  let [l, r] = [0, list.length - 1];
+  let ans;
+  let minDiff;
+  while(l < r) {
+    const sum = list[l] + list[r];
+    const diff = Math.abs(target - sum);
+    if (diff === 0) {
+      ans = [l, r];
+      break;
+    }
+    if (!minDiff || diff < minDiff) {
+      ans = [l, r];
+      minDiff = diff;
+    }
+    if (sum < target) l++;
+    else r--;
+  }
+  return [indexMap[list[ans[0]]], indexMap[list[ans[1]]]];
+};
+
+const check = (list, target, expect) => {
+  const res = twoSum(list, target);
+  return (res[0] === expect[0] && res[1] === expect[1]);
+}
+
+console.log(check([1,2,3,4,5], 7, [2, 3]));
+console.log(check([1,2,-3,4,5], 6, [2, 3]));
+console.log(check([], 7, [2, 3]));
+</script>
+</body>
+</html>
