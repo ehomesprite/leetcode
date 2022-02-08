@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string[]} tokens
+   * @return {number}
+   */
+  var f = evalRPN = function(tokens) {
+    const stack = [];
+    const operators = new Set(['+', '-', '*', '/']);
+    tokens.forEach((token) => {
+      if (operators.has(token)) {
+        const n1 = stack.pop();
+        const n2 = stack.pop();
+        const res = Math.floor(eval(`${n2}${token}${n1}`));
+        stack.push(res);
+      } else {
+        stack.push(+token);
+      }
+    });
+    return stack[0];
+  };
+</script>
+</body>
+</html>
