@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  class MyStack {
+    constructor() {
+      this._mins = [];
+      this._list = [];
+    }
+
+    get min () {
+      return this._mins[this._mins.length - 1];
+    }
+
+    push(val) {
+      const min = this.min;
+      this._list.push(val);
+      if (min === undefined || val <= min) {
+        this._mins.push(val);
+      }
+    }
+
+    pop() {
+      const val = this._list.pop();
+      if (val === this.min) this._mins.pop();
+      return val;
+    }
+  }
+
+  const methodList = ['push', 'push', 'push', 'push', 'push', 'pop', 'pop', 'pop'];
+  const paramsList = [3, 2, 1, 1, 1, null, null, null];
+  const expectList = [3, 2, 1, 1, 1, 1, 1, 2];
+
+  const stack = new MyStack();
+
+  const check = () => {
+    const ans = [];
+    for (let i = 0; i < methodList.length; i++) {
+      const methodName = methodList[i];
+      const params = paramsList[i];
+      stack[methodName]?.(params);
+      ans.push(stack.min);
+    }
+    for (let i = 0; i < paramsList.length; i++) {
+      if (paramsList[i] !== expectList[i]) return false;
+    }
+    return true;
+  };
+
+  console.log(check());
+</script>
+</body>
+</html>

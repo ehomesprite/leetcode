@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+求一个非负整数数组 [1, 23, 400, 241]，自由排列后可拼接成的最大整数值 "400241231"
+
+24999 > 24 > 219
+655 > 656
+400 241
+
+<script>
+  const sort = (list) => {
+    list = list.map(n => n.toString());
+    list.sort((a, b) => {
+      if (a[0] > b[0]) return -1;
+      else if (a[0] < b[0]) return 1;
+      else {
+        if (a + b > b + a) return -1;
+        else if (a + b === b + a) return 0;
+        else return 1;
+      }
+    });
+    return list.join('');
+  };
+</script>
+</body>
+</html>

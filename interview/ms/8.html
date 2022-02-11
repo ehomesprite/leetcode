@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+'acc' | 'ac' ->  acc | ac
+dp[m][n] = diff(m - n) = dp[];
+i -> m  j -> n
+  if (i === 0) dp[m][n] = j;
+  if (j === 0) dp[m][n] = i;
+  if (m === n === 1) dp[m][n] = str1[m] === str2[n] ? 0 : 1
+  dp[m][n] = (dp[m-1][n] | dp[m][n-1]) + (str1[i] === str2[j] ? 0 : 1);
+
+<script>
+  const f = strDiff = (str1, str2) => {
+    const [m, n] = [str1.length, str2.length];
+    const dp = new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0));
+    for (let i = 0; i <= m; i++) {
+      for (let j = 0; j <= n; j++) {
+        if (i === 0) dp[i][j] = j;
+        else if (j === 0) dp[i][j] = i;
+        else dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + (str1[i] === str2[j]) ? 0 : 1;
+      }
+    }
+    return dp[m][n];
+  };
+</script>
+</body>
+</html>

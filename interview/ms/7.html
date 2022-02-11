@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const bfs = (root) => {
+    const ans = [];
+    const list = [root];
+    while(list.length) {
+      let layer = [];
+      let step = list.length;
+      while(step-- > 0) {
+        const node = list.unshift();
+        layer.push(node.val);
+        if (node.left) list.push(node.left);
+        if (node.right) list.push(node.right);
+      }
+      ans.push(layer);
+    }
+    return ans;
+  }
+</script>
+</body>
+</html>

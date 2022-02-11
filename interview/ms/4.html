@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+    a
+   b c
+  d e
+
+    [a] a
+    [cb] b
+    [ced] d
+    [ce] e
+    c
+<script>
+  const findDLR = (root) => {
+    const list = [];
+    const _find = (node) => {
+      if (!node) return;
+      list.push(node);
+      _find(node.left);
+      _find(node.right);
+    };
+    _find(root);
+    return list;
+  };
+
+  const findDLR2 = (root) => {
+    const list = [];
+    const stack = [root];
+    while(stack.length) {
+      const node = stack.pop();
+      list.push(node);
+      if (node.right) stack.push(node.right);
+      if (node.left) stack.push(node.left);
+    }
+    return list;
+  }
+
+  function ListNode(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+
+  const nodeA = new ListNode(5);
+  nodeA.left = new ListNode(3);
+  nodeA.left.left = new ListNode(2);
+  nodeA.left.right = new ListNode(4);
+  nodeA.right = new ListNode(6);
+
+  console.log(findDLR(nodeA).join(','));
+</script>
+</body>
+</html>
