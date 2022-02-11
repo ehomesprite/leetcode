@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * // Definition for a Node.
+   * function Node(val, next, random) {
+   *    this.val = val;
+   *    this.next = next;
+   *    this.random = random;
+   * };
+   */
+  function Node(val, next, random) {
+    this.val = val;
+    this.next = next;
+    this.random = random;
+  }
+
+  const head = new Node(1);
+  head.next = new Node(2, null, head);
+
+  /**
+   * @param {Node} head
+   * @return {Node}
+   */
+  var f = copyRandomList = function (head) {
+    const cache = new WeakMap();
+    const hair = new Node();
+    let p = head;
+    let copyP = hair;
+    const copy = (node) => {
+      if (!node) return null;
+      if (cache.has(node)) return cache.get(node);
+      const newNode = new Node(node.val);
+      cache.set(node, newNode);
+      return newNode;
+    };
+    while (p) {
+      const newNode = copy(p);
+      newNode.random = copy(p.random);
+      copyP.next = newNode;
+      copyP = newNode;
+      p = p.next;
+    }
+    return hair.next;
+  };
+</script>
+</body>
+</html>

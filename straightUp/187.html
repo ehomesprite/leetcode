@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * @param {string} s
+   * @return {string[]}
+   */
+  var f = findRepeatedDnaSequences = function(s) {
+    const set = new Set();
+    const ans = new Set();
+    for (let i = 0; i < s.length - 9; i++) {
+      const str = s.slice(i, i + 10);
+      if (!set.has(str)) set.add(str);
+      else ans.add(str);
+    }
+    return [...ans];
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   */
+  var reorderList = function(head) {
+    const list = [];
+    let p = head;
+    while(p) {
+      list.push(p);
+      p = p.next;
+    }
+    let hair = { next: null };
+    p = hair;
+    while(list.length) {
+      const start = list.shift();
+      const end = list.pop();
+      start.next = end || null;
+      end && (end.next = null);
+      p.next = start;
+      p = end || start;
+    }
+    return hair.next;
+  };
+</script>
+</body>
+</html>
